@@ -8,7 +8,7 @@
 ## 页面
 
 ```
-index.html     首页：广告墙、密钥有效期、流程、常见问题
+index.html     首页：广告墙放最前，点“我要投放”弹密钥框（noindex 无关，见下）
 guide.html     投放指南
 publish.html   投放页：先验证密钥，再生成广告卡片（noindex）
 go.html        跳转中转页，只放行 http/https（noindex）

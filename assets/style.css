@@ -241,6 +241,54 @@ code {
   color: #d7e3f5;
 }
 
+/* ---------- slots (首页首屏) ---------- */
+
+.slots-top { padding: 34px 0 48px; }
+
+.slots-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.slots-head h1 {
+  margin: 0 0 5px;
+  font-size: clamp(1.7rem, 3vw, 2.1rem);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.slots-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.slots-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 20px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.slots-note .btn { flex: none; }
+
+@media (max-width: 640px) {
+  .slots-top { padding: 24px 0 36px; }
+  .slots-head { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .slots-head .pill { display: none; }
+}
+
 /* ---------- hero ---------- */
 
 .hero {
