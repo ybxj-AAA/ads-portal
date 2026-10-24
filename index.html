@@ -4,22 +4,62 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>广告投放中心 · 优质广告位展示与直达链接</title>
-<meta name="description" content="广告投放中心：集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。广告位持续更新，欢迎合作投放。" />
-<meta name="keywords" content="广告投放,广告位,广告展示,链接推广,广告合作" />
+<meta name="description" content="广告投放中心：集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。提供投放指南、广告位类型与计费方式说明，广告位持续更新，欢迎合作投放。" />
+<meta name="keywords" content="广告投放,广告位,广告展示,链接推广,广告合作,落地页,广告位出租" />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="广告投放中心" />
 <link rel="canonical" href="https://ybxj-aaa.github.io/ads-portal/" />
 <meta property="og:type" content="website" />
+<meta property="og:site_name" content="广告投放中心" />
 <meta property="og:title" content="广告投放中心 · 优质广告位展示与直达链接" />
 <meta property="og:description" content="集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。" />
 <meta property="og:url" content="https://ybxj-aaa.github.io/ads-portal/" />
+<meta property="og:locale" content="zh_CN" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>" />
 <link rel="stylesheet" href="assets/style.css" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "广告投放中心",
-  "url": "https://ybxj-aaa.github.io/ads-portal/",
-  "description": "集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://ybxj-aaa.github.io/ads-portal/#website",
+      "name": "广告投放中心",
+      "url": "https://ybxj-aaa.github.io/ads-portal/",
+      "inLanguage": "zh-CN",
+      "description": "集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://ybxj-aaa.github.io/ads-portal/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "广告位怎么投放？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "打开发布页填写广告标题、描述和落地页链接，复制生成的卡片代码，粘贴到首页广告墙对应位置提交即可上线。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "支持跳转到哪些链接？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "支持 http 和 https 协议的网址，点击后经中转页跳转到广告主指定的落地页，其他协议会被拦截。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "站点是静态的吗？需要服务器吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "站点为纯静态页面，托管在 GitHub Pages，没有数据库和后端依赖，提交代码后自动构建发布。"
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 </head>
@@ -28,6 +68,7 @@
   <a class="brand" href="./">📣 广告投放中心</a>
   <nav>
     <a href="#ads">广告墙</a>
+    <a href="guide.html">投放指南</a>
     <a href="publish.html">投放广告</a>
     <a href="#about">关于</a>
   </nav>
@@ -79,6 +120,16 @@
   </div>
 </main>
 
+<section id="faq" class="container about">
+  <h2 class="section-title">常见问题</h2>
+  <h3>广告位怎么投放？</h3>
+  <p>打开发布页填写广告标题、描述和落地页链接，复制生成的卡片代码，粘贴到首页广告墙对应位置提交即可上线。投放详情可以看<a href="guide.html">投放指南</a>。</p>
+  <h3>支持跳转到哪些链接？</h3>
+  <p>支持 http 和 https 协议的网址，点击后经中转页跳转到广告主指定的落地页，其他协议会被拦截。</p>
+  <h3>站点是静态的吗？需要服务器吗？</h3>
+  <p>站点为纯静态页面，托管在 GitHub Pages，没有数据库和后端依赖，提交代码后自动构建发布。</p>
+</section>
+
 <section id="about" class="container about">
   <h2 class="section-title">关于本站</h2>
   <p>本站是一个轻量广告投放展示页：广告位以卡片形式集中呈现，访客点击后经中转页跳转到广告主指定的落地页。站点为纯静态页面，托管在 GitHub Pages，无数据库、无后端依赖。</p>
@@ -86,7 +137,7 @@
 </section>
 
 <footer class="footer">
-  <p>© <span id="year"></span> 广告投放中心 · 纯静态站点，托管于 GitHub Pages</p>
+  <p>© <span id="year"></span> 广告投放中心 · 纯静态站点，托管于 GitHub Pages · <a href="guide.html">投放指南</a></p>
 </footer>
 
 <script src="assets/app.js"></script>
