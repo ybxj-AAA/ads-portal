@@ -1173,7 +1173,7 @@ details.more[open] summary::after { content: "－"; }
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker-scroll 34s linear infinite;
+  animation: ticker-scroll 60s linear infinite;
 }
 
 .ticker-group {
