@@ -1123,3 +1123,16 @@ details.more[open] summary::after { content: "－"; }
 }
 
 .fold-body p:last-child { margin-bottom: 0; }
+/* 顶部横幅 */
+
+.top-banner {
+  display: block;
+  margin: 0 0 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.top-banner img { display: block; width: 100%; height: auto; }
+.top-banner:hover { border-color: var(--ink); }
