@@ -24,6 +24,7 @@ window.ADS_KEYS = {
     { h: 'a4e870d3f0fbd4f10ce1c0ac7d95c0e066e47bba7d139a63182c9e8eda9cc0fa', plan: '1 年', days: 365, issued: '2026-10-24' },
     { h: '8a565071716a22ab29eb2ec20f4b3e596c9be3901105b1f4562444710533a947', plan: '1 年', days: 365, issued: '2026-10-24' },
     { h: '74585e6636f890016901539177127acb3588896e10ec8ea99e14aa905913c8c4', plan: '长期', days: 36500, issued: '2026-10-24' },
-    { h: 'dc503958cb9782cccef1e5919ae91fc2a53a9568b7e50530fbefbd4d7a6ee6aa', plan: '长期', days: 36500, issued: '2026-10-24' }
+    { h: 'dc503958cb9782cccef1e5919ae91fc2a53a9568b7e50530fbefbd4d7a6ee6aa', plan: '长期', days: 36500, issued: '2026-10-24' },
+    { h: '72d6877282bddf7bef194e50d99e6a70f0e31ee2b96b5d3327a718652ca09ebc', plan: '无限', days: 36500, issued: '2026-10-24' }
   ]
 };
