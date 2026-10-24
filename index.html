@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>广告投放中心 · 优质广告位展示与直达链接</title>
+<meta name="description" content="广告投放中心：集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。广告位持续更新，欢迎合作投放。" />
+<meta name="keywords" content="广告投放,广告位,广告展示,链接推广,广告合作" />
+<link rel="canonical" href="https://ybxj-aaa.github.io/ads-portal/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="广告投放中心 · 优质广告位展示与直达链接" />
+<meta property="og:description" content="集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。" />
+<meta property="og:url" content="https://ybxj-aaa.github.io/ads-portal/" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>" />
+<link rel="stylesheet" href="assets/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "广告投放中心",
+  "url": "https://ybxj-aaa.github.io/ads-portal/",
+  "description": "集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。"
+}
+</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./">📣 广告投放中心</a>
+  <nav>
+    <a href="#ads">广告墙</a>
+    <a href="publish.html">投放广告</a>
+    <a href="#about">关于</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>把广告放在会被看见的地方</h1>
+  <p>优质广告位集中展示，点击即达落地页；支持自定义跳转链接，投放数据一目了然。</p>
+  <div class="hero-actions">
+    <a class="btn primary" href="#ads">浏览广告位</a>
+    <a class="btn ghost" href="publish.html">我要投放</a>
+  </div>
+</section>
+
+<main id="ads" class="container">
+  <h2 class="section-title">在投广告位</h2>
+  <div class="grid" id="adGrid">
+
+    <article class="card" data-ad-id="demo-a">
+      <div class="cover cover-a">AD</div>
+      <div class="card-body">
+        <span class="tag">推荐位</span>
+        <h3>示例广告位 A</h3>
+        <p>这里是广告描述，两行以内说清楚卖点。点击按钮直达广告主落地页。</p>
+        <a class="btn primary full" href="go.html?u=https%3A%2F%2Fexample.com&id=demo-a" target="_blank" rel="noopener">立即前往 →</a>
+      </div>
+    </article>
+
+    <article class="card" data-ad-id="demo-b">
+      <div class="cover cover-b">AD</div>
+      <div class="card-body">
+        <span class="tag">热推</span>
+        <h3>示例广告位 B</h3>
+        <p>把 index.html 里的这块卡片换成你的广告，链接换成你的落地页即可。</p>
+        <a class="btn primary full" href="go.html?u=https%3A%2F%2Fexample.org&id=demo-b" target="_blank" rel="noopener">立即前往 →</a>
+      </div>
+    </article>
+
+    <article class="card" data-ad-id="demo-c">
+      <div class="cover cover-c">AD</div>
+      <div class="card-body">
+        <span class="tag">新上架</span>
+        <h3>示例广告位 C</h3>
+        <p>也可以只做纯链接投放：标题 + 一句话 + 按钮，不需要图片也一样好看。</p>
+        <a class="btn primary full" href="go.html?u=https%3A%2F%2Fexample.net&id=demo-c" target="_blank" rel="noopener">立即前往 →</a>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<section id="about" class="container about">
+  <h2 class="section-title">关于本站</h2>
+  <p>本站是一个轻量广告投放展示页：广告位以卡片形式集中呈现，访客点击后经中转页跳转到广告主指定的落地页。站点为纯静态页面，托管在 GitHub Pages，无数据库、无后端依赖。</p>
+  <p>投放方式：打开发布页生成卡片代码，粘贴进 <code>index.html</code> 的广告墙区域，提交即生效。</p>
+</section>
+
+<footer class="footer">
+  <p>© <span id="year"></span> 广告投放中心 · 纯静态站点，托管于 GitHub Pages</p>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

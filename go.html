@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>正在跳转…</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="redirect">
+  <div class="spinner"></div>
+  <h2 id="title">正在前往广告主页面…</h2>
+  <p class="hint">如果没有自动跳转，<a id="manual" href="#" rel="noopener">点这里继续</a>。</p>
+</div>
+
+<script>
+(function () {
+  var title = document.getElementById('title');
+  var manual = document.getElementById('manual');
+
+  function getParam(name) {
+    var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(location.search);
+    return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
+  }
+
+  var target = getParam('u');
+
+  // 只允许 http/https，避免 javascript: 等危险协议
+  var safe = false;
+  try {
+    var parsed = new URL(target);
+    safe = parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch (e) { safe = false; }
+
+  if (!safe) {
+    title.textContent = '链接无效';
+    manual.textContent = '返回广告墙';
+    manual.href = './';
+    return;
+  }
+
+  var id = getParam('id');
+  try {
+    var key = 'adclick:' + (id || target);
+    var n = parseInt(localStorage.getItem(key) || '0', 10) + 1;
+    localStorage.setItem(key, String(n));
+  } catch (e) { /* ignore */ }
+
+  manual.href = target;
+
+  setTimeout(function () { location.replace(target); }, 400);
+})();
+</script>
+</body>
+</html>
