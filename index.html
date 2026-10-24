@@ -138,28 +138,35 @@
       </div>
 
       <div class="slots-note">
-        <span>要挂自己的广告：点「我要投放」输入密钥。没有密钥找 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">TG @tg7879</a>。</span>
-        <a class="btn btn-ghost btn-sm" href="publish.html" data-key-open>我要投放</a>
+        <span>要挂自己的广告？点「我要投放」，需要密钥（7 天到长期）。没有密钥问 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">TG @tg7879</a>。</span>
+        <a class="btn btn-primary btn-sm" href="publish.html" data-key-open>我要投放</a>
       </div>
     </div>
   </section>
 
   <section class="section" id="faq">
     <div class="wrap">
-      <div class="section-head">
-        <h2>常见问题</h2>
-        <p>与投放直接相关的几条，其余的写在<a class="tg-link" href="guide.html">投放指南</a>里。</p>
-      </div>
-      <dl class="faq-list">
-        <dt>怎么把广告挂上去？</dt>
-        <dd>点页面上的「我要投放」，输入密钥，填标题、描述和落地页链接，生成一段卡片代码，贴到本页广告墙提交就行。</dd>
-        <dt>密钥有几种？</dt>
-        <dd>7 天、1 个月、3 个月、6 个月、1 年和长期，从签发日算起。到期后投放页会重新锁上，续期换新密钥。</dd>
-        <dt>链接有什么限制？</dt>
-        <dd>只放行 http 和 https。别的协议会被跳转页拦下来，避免 <code>javascript:</code> 这类东西。</dd>
-        <dt>站点要服务器吗？</dt>
-        <dd>不用。整站是静态文件，放在 GitHub Pages 上，提交后自动构建，没有数据库。</dd>
-      </dl>
+      <details class="fold">
+        <summary>常见问题</summary>
+        <dl class="faq-list">
+          <dt>怎么把广告挂上去？</dt>
+          <dd>点页面上的「我要投放」，输入密钥，填落地页链接、选展示图、选位置，点「发布上线」，一两分钟就出现在上面。</dd>
+          <dt>密钥有几种？</dt>
+          <dd>7 天、1 个月、3 个月、6 个月、1 年和长期，从签发日算起。到期后投放页会重新锁上，续期换新密钥。</dd>
+          <dt>链接有什么限制？</dt>
+          <dd>只放行 http 和 https。别的协议会被跳转页拦下来，避免 <code>javascript:</code> 这类东西。</dd>
+          <dt>站点要服务器吗？</dt>
+          <dd>不用。整站是静态文件，放在 GitHub Pages 上，提交后自动构建，没有数据库。</dd>
+        </dl>
+      </details>
+      <details class="fold">
+        <summary>关于本站</summary>
+        <div class="fold-body">
+          <p>这里是一个静态的广告位展示页。每条广告一张卡片，点开就是广告主给的页面，跳转只认 http 和 https。</p>
+          <p>投放需要密钥，有效期 7 天到长期，没有密钥找 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">TG @tg7879</a>。具体填法和注意事项写在<a class="tg-link" href="guide.html">投放指南</a>里。</p>
+          <p>整站托管在 GitHub Pages，没有数据库；卡片上的点击次数只记在访问者浏览器本地，不上报。</p>
+        </div>
+      </details>
     </div>
   </section>
 </main>
