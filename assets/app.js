@@ -1,4 +1,4 @@
-/* 广告投放中心 — 页面交互与密钥校验 */
+﻿/* 广告投放中心 — 页面交互与密钥校验 */
 (function () {
   'use strict';
 
@@ -212,7 +212,7 @@
       validateKey(value).then(function (res) {
         if (res.status === 'ok') {
           saveSession(res);
-          showMsg('ok', '密钥有效：' + res.plan + '，' + (res.permanent ? '长期有效。' : '到期 ' + fmtDate(res.expiresAt) + '。'));
+          showMsg('ok', '密钥有效：' + res.plan + '，' + (res.permanent ? '不过期。' : '到期 ' + fmtDate(res.expiresAt) + '。'));
           setTimeout(function () {
             closeModal();
             if (typeof onSuccess === 'function') onSuccess(res);
@@ -267,7 +267,7 @@
       main.classList.add('is-unlocked');
       if (statusWrap) {
         if (planEl) planEl.textContent = session.plan || '已授权';
-        if (expEl) expEl.textContent = session.perm ? '长期有效' : (session.exp ? '有效期至 ' + session.exp : '');
+        if (expEl) expEl.textContent = session.perm ? '不过期' : (session.exp ? '有效期至 ' + session.exp : '');
       }
     }
 
