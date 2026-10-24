@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>投放广告 · 生成广告卡片代码</title>
+<meta name="description" content="填写广告标题、描述与落地页链接，一键生成可直接粘贴的广告卡片代码。" />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./">📣 广告投放中心</a>
+  <nav>
+    <a href="index.html#ads">广告墙</a>
+    <a href="publish.html">投放广告</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1 class="section-title">生成广告卡片</h1>
+  <p class="hint">填好下面几项，点“生成代码”，把结果粘进 <code>index.html</code> 的广告墙区域，提交后就会出现在站点上。</p>
+
+  <form class="form" id="form">
+    <div class="field">
+      <label for="id">广告 ID（英文，用于统计点击）</label>
+      <input id="id" name="id" placeholder="如 shop-a" required />
+    </div>
+    <div class="field">
+      <label for="tag">角标文字</label>
+      <input id="tag" name="tag" placeholder="如 推荐位 / 热推 / 新上架" />
+    </div>
+    <div class="field">
+      <label for="title">广告标题</label>
+      <input id="title" name="title" placeholder="如 XX 商城限时活动" required />
+    </div>
+    <div class="field">
+      <label for="desc">广告描述（一句到两句）</label>
+      <textarea id="desc" name="desc" placeholder="20-40 字说清卖点"></textarea>
+    </div>
+    <div class="field">
+      <label for="url">落地页链接（http/https）</label>
+      <input id="url" name="url" placeholder="https://你的落地页" required />
+    </div>
+    <div class="field">
+      <label for="cover">封面色</label>
+      <select id="cover" name="cover" style="width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#0e1522;color:var(--ink)">
+        <option value="cover-a">蓝青</option>
+        <option value="cover-b">紫粉</option>
+        <option value="cover-c">墨绿</option>
+      </select>
+    </div>
+    <div>
+      <button class="btn primary" type="submit">生成代码</button>
+      <button class="btn ghost" type="button" id="copyBtn">复制</button>
+    </div>
+  </form>
+
+  <h2 class="section-title">生成的代码</h2>
+  <pre class="output" id="output">填好上面的表单后点“生成代码”。</pre>
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> 广告投放中心</p>
+</footer>
+
+<script>
+(function () {
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var form = document.getElementById('form');
+  var output = document.getElementById('output');
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var id = document.getElementById('id').value.trim();
+    var tag = document.getElementById('tag').value.trim() || '广告位';
+    var title = document.getElementById('title').value.trim();
+    var desc = document.getElementById('desc').value.trim();
+    var url = document.getElementById('url').value.trim();
+    var cover = document.getElementById('cover').value;
+
+    var href = 'go.html?u=' + encodeURIComponent(url) + '&id=' + encodeURIComponent(id);
+
+    var html = [
+      '<article class="card" data-ad-id="' + esc(id) + '">',
+      '  <div class="cover ' + esc(cover) + '">AD</div>',
+      '  <div class="card-body">',
+      '    <span class="tag">' + esc(tag) + '</span>',
+      '    <h3>' + esc(title) + '</h3>',
+      '    <p>' + esc(desc) + '</p>',
+      '    <a class="btn primary full" href="' + esc(href) + '" target="_blank" rel="noopener">立即前往 →</a>',
+      '  </div>',
+      '</article>'
+    ].join('\n');
+
+    output.textContent = html;
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var text = output.textContent;
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(function () {
+      document.getElementById('copyBtn').textContent = '已复制';
+      setTimeout(function () { document.getElementById('copyBtn').textContent = '复制'; }, 1500);
+    });
+  });
+})();
+</script>
+</body>
+</html>
