@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
@@ -50,9 +50,16 @@
           </div>
 
           <div class="field">
-            <label for="adImage">展示图链接 <span class="opt">可选</span></label>
-            <input id="adImage" type="text" placeholder="https://xxx.com/banner.jpg" autocomplete="off" spellcheck="false" />
-            <span class="hint">直接粘图片地址（.jpg / .png / .webp）。不填就用色块占位。</span>
+            <label>展示图 <span class="opt">可选</span></label>
+            <div class="upload-row">
+              <label class="btn btn-ghost btn-sm" for="adImageFile">从电脑选图</label>
+              <input id="adImageFile" type="file" accept="image/*" hidden />
+              <button class="link-btn" type="button" data-image-clear hidden>移除</button>
+              <span class="hint" data-image-state>没选图片就用色块占位</span>
+            </div>
+            <img class="upload-preview" data-image-preview hidden alt="" />
+            <input id="adImage" type="text" placeholder="或者粘图片地址 https://…" autocomplete="off" spellcheck="false" />
+            <span class="hint">选图会自动压到 960px 宽，不用管格式。</span>
           </div>
 
           <div class="field">

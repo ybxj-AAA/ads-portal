@@ -1013,3 +1013,23 @@ details.more summary::after {
 }
 
 details.more[open] summary::after { content: "－"; }
+/* 图片上传 */
+
+[hidden] { display: none !important; }
+
+.upload-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.upload-preview {
+  width: 180px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin: 0 0 8px;
+}
