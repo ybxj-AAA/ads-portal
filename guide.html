@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>广告投放指南 · 广告位类型、计费方式与投放流程</title>
-<meta name="description" content="广告投放指南：介绍常见广告位类型（展示位、推荐位、文字链）、计费方式（CPM、CPC、CPA）、落地页与跳转链接的注意事项，以及在本站上架广告的完整流程。" />
-<meta name="keywords" content="广告投放指南,广告位类型,CPM,CPC,CPA,落地页,链接推广,广告投放流程" />
+<title>投放广告前，先看这几件事 · 广告投放指南</title>
+<meta name="description" content="广告位有哪几种、CPM/CPC/CPA 到底买的是什么、落地页常踩的坑，以及在这个站上架一条广告的具体步骤。都是实操，不绕弯。" />
+<meta name="keywords" content="广告投放指南,广告位类型,CPM,CPC,CPA,落地页" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://ybxj-aaa.github.io/ads-portal/guide.html" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="广告投放中心" />
-<meta property="og:title" content="广告投放指南 · 广告位类型、计费方式与投放流程" />
-<meta property="og:description" content="常见广告位类型、计费方式、落地页注意事项与上架流程。" />
+<meta property="og:title" content="投放广告前，先看这几件事" />
+<meta property="og:description" content="广告位类型、计费方式、落地页的坑，和上架步骤。" />
 <meta property="og:url" content="https://ybxj-aaa.github.io/ads-portal/guide.html" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>" />
 <link rel="stylesheet" href="assets/style.css" />
@@ -19,8 +19,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "广告投放指南：广告位类型、计费方式与投放流程",
-  "description": "介绍常见广告位类型、计费方式、落地页注意事项，以及在本站上架广告的完整流程。",
+  "headline": "投放广告前，先看这几件事",
+  "description": "广告位类型、CPM/CPC/CPA 计费方式、落地页常踩的坑，以及在这个站上架广告的步骤。",
   "inLanguage": "zh-CN",
   "mainEntityOfPage": "https://ybxj-aaa.github.io/ads-portal/guide.html",
   "author": { "@type": "Organization", "name": "广告投放中心" },
@@ -39,41 +39,45 @@
 </header>
 
 <main class="container">
-  <h1>广告投放指南</h1>
-  <p class="hint">这份指南说明常见的广告位类型、计费方式和投放流程，帮助你把一条链接变成能被点击的广告位。</p>
+  <h1>投放广告前，先看这几件事</h1>
+  <p class="hint">写这篇是因为见过太多次：钱花出去了，才发现链接点不动，或者落地页和广告说的不是一回事。下面按顺序说，能省掉一部分试错。</p>
 
-  <h2 class="section-title">一、常见广告位类型</h2>
-  <p><strong>展示位（Banner）</strong>：以图片为主，适合品牌曝光和活动推广，通常出现在页面顶部或内容区之间。</p>
-  <p><strong>推荐位</strong>：以卡片形式呈现，包含标题、一句描述和按钮，信息量比纯图片大，适合需要解释卖点的产品。</p>
-  <p><strong>文字链</strong>：只有一行文字加链接，占用空间小，适合在文章列表、导航条或页脚做补充曝光。</p>
-  <p>本站目前采用卡片式推荐位：每张卡片由角标、标题、描述和跳转按钮组成，读者扫一眼就能判断要不要点击。</p>
+  <h2 class="section-title">广告位就那么几种</h2>
+  <p>图片横幅最占地方，适合活动曝光，缺点是一张图说不清细节。</p>
+  <p>卡片是标题加一句话加按钮，信息量比图大，读者能自己判断要不要点，转化一般比纯图好。</p>
+  <p>文字链只有一行字，不占地方，适合在页脚、列表里补一点曝光，指望它带量不现实。</p>
+  <p>这个站用的是卡片。三张卡的样式在 <code>assets/style.css</code> 里，想改高度或配色，动 <code>.card</code> 和 <code>.cover</code> 就行。</p>
 
-  <h2 class="section-title">二、计费方式怎么选</h2>
-  <p><strong>CPM（按千次展示计费）</strong>：适合以曝光为目标的推广，成本可预测，但不保证点击。</p>
-  <p><strong>CPC（按点击计费）</strong>：只有用户点击落地页链接才计费，适合追求流量和转化的投放。</p>
-  <p><strong>CPA（按行动计费）</strong>：注册、下单等行为发生后计费，转化最直接，但对落地页和产品要求高。</p>
-  <p>如果只是测试一条链接的效果，先看点击率和跳出率，再决定要不要加大预算。</p>
+  <h2 class="section-title">先搞清自己买的是什么</h2>
+  <p>CPM 按展示次数算，一千次一结。买的是曝光，点不点不管，预算好算但效果不好估。</p>
+  <p>CPC 按点击算，没点就不花钱。适合刚起步先测效果，点击率能接受再加预算。</p>
+  <p>CPA 按注册、下单这类动作算。对广告主最划算，但对落地页和产品要求最高，转化差一点就没人愿意投。</p>
+  <p>刚开始别急着包月。先跑几百次点击，看看点击率和停留时间，数据不行就换素材，比加钱有用。</p>
 
-  <h2 class="section-title">三、落地页与跳转链接</h2>
-  <p>用户点击广告后到达的页面就是落地页。落地页和广告文案要一致：广告说限时活动，落地页就该是活动页，否则点击率再高也留不住人。</p>
-  <p>链接建议使用 https，确保手机端能正常打开；跳转前建议保留来源参数（如 ?from=ad），方便统计渠道效果。</p>
-  <p>本站的跳转页只放行 http 和 https 协议，其他协议会被拦截，这是为了防止恶意链接。</p>
+  <h2 class="section-title">落地页最容易出问题</h2>
+  <p>广告写“限时五折”，点进去是首页——这么干，进来的人一半会直接走。</p>
+  <p>手机上打不开、三秒还没出内容，比文案写得差更致命。投放前拿自己的手机点一遍，这一步别省。</p>
+  <p>链接尽量走 https，跳转前带个来源参数，像 <code>?from=ad</code> 这种，回头能对上账。</p>
+  <p>这个站的 <code>go.html</code> 只放行 http 和 https。别的协议会被判无效，页面上会显示“链接无效”，不会跳出去。</p>
 
-  <h2 class="section-title">四、在本站上架广告的流程</h2>
-  <p>第一步，打开发布页，填写广告 ID、角标、标题、描述和落地页链接。</p>
-  <p>第二步，点击生成代码，复制生成的卡片 HTML。</p>
-  <p>第三步，把卡片粘贴到首页广告墙区域，提交后由自动部署流程构建上线。</p>
-  <p>第四步，点击卡片验证跳转是否正常；点击次数会记录在浏览器本地存储里，方便快速自查。</p>
+  <h2 class="section-title">在这个站加一条广告</h2>
+  <p>1. 打开发布页，填广告 ID（英文，随便起，用来记点击）、角标、标题、描述、落地页链接。</p>
+  <p>2. 点“生成代码”，把生成的那段 <code>article</code> 复制下来。</p>
+  <p>3. 打开 <code>index.html</code>，找到 <code>&lt;div class="grid" id="adGrid"&gt;</code>，粘在最后一张卡后面。</p>
+  <p>4. 提交。GitHub Actions 会自动构建，一分钟左右页面就更新。</p>
+  <p>5. 点一遍卡片，确认跳转没被挡、落地页能打开。</p>
 
-  <h2 class="section-title">五、注意事项</h2>
-  <p>广告内容需要真实合法，不投放虚假宣传、诱导下载或侵犯他人权益的内容。落地页应能正常访问，避免出现空白页或跳转到无关站点。</p>
-  <p>建议一次只改一张卡片，改完立刻验证；批量修改容易漏掉卡片格式，导致页面样式错乱。</p>
+  <h2 class="section-title">几条实际经验</h2>
+  <p>一次只改一张卡，改完立刻看一眼。三张一起改，出了问题不知道是哪张的。</p>
+  <p>描述别写满，留半行空白比塞满好读。</p>
+  <p>文案用大白话。“赋能”“一站式”这种词，读者一眼就知道是套模板，点击率不会好看。</p>
+  <p>广告内容要真。虚假宣传、诱导下载这类，被举报一次，站就不好过了。</p>
 
   <p><a class="btn primary" href="publish.html">去生成广告卡片</a></p>
 </main>
 
 <footer class="footer">
-  <p>© <span id="year"></span> 广告投放中心 · 纯静态站点，托管于 GitHub Pages</p>
+  <p>© <span id="year"></span> 广告投放中心 · 静态站，托管在 GitHub Pages</p>
 </footer>
 
 <script src="assets/app.js"></script>

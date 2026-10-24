@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>投放广告 · 生成广告卡片代码</title>
-<meta name="description" content="填写广告标题、描述与落地页链接，一键生成可直接粘贴的广告卡片代码。" />
+<meta name="description" content="填标题、描述和落地页链接，生成一段卡片 HTML，粘到首页广告墙就上线。纯静态站，不用后台。" />
 <meta name="robots" content="noindex, follow" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>" />
 <link rel="stylesheet" href="assets/style.css" />
@@ -14,13 +14,14 @@
   <a class="brand" href="./">📣 广告投放中心</a>
   <nav>
     <a href="index.html#ads">广告墙</a>
+    <a href="guide.html">投放指南</a>
     <a href="publish.html">投放广告</a>
   </nav>
 </header>
 
 <main class="container">
   <h1 class="section-title">生成广告卡片</h1>
-  <p class="hint">填好下面几项，点“生成代码”，把结果粘进 <code>index.html</code> 的广告墙区域，提交后就会出现在站点上。</p>
+  <p class="hint">填完点“生成代码”，把结果粘进 <code>index.html</code> 的广告墙区域（<code>id="adGrid"</code> 那个 div），提交后一分钟左右上线。</p>
 
   <form class="form" id="form">
     <div class="field">

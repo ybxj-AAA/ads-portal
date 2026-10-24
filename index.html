@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>广告投放中心 · 优质广告位展示与直达链接</title>
-<meta name="description" content="广告投放中心：集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。提供投放指南、广告位类型与计费方式说明，广告位持续更新，欢迎合作投放。" />
-<meta name="keywords" content="广告投放,广告位,广告展示,链接推广,广告合作,落地页,广告位出租" />
+<title>广告投放中心 · 广告位展示与直达链接</title>
+<meta name="description" content="这里摆着几条广告位，点“立即前往”直接跳到广告主给的落地页。想放自己的广告，去投放页生成卡片粘进来就行。整站静态，托管在 GitHub Pages。" />
+<meta name="keywords" content="广告投放,广告位,链接推广,广告合作,落地页" />
 <meta name="robots" content="index, follow" />
-<meta name="author" content="广告投放中心" />
 <link rel="canonical" href="https://ybxj-aaa.github.io/ads-portal/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="广告投放中心" />
-<meta property="og:title" content="广告投放中心 · 优质广告位展示与直达链接" />
-<meta property="og:description" content="集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。" />
+<meta property="og:title" content="广告投放中心 · 广告位展示与直达链接" />
+<meta property="og:description" content="几条广告位，点一下直接到广告主给的落地页。" />
 <meta property="og:url" content="https://ybxj-aaa.github.io/ads-portal/" />
 <meta property="og:locale" content="zh_CN" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>" />
@@ -27,7 +26,7 @@
       "name": "广告投放中心",
       "url": "https://ybxj-aaa.github.io/ads-portal/",
       "inLanguage": "zh-CN",
-      "description": "集中展示优质广告位，点击直达广告主落地页，支持自定义链接跳转。"
+      "description": "几条广告位，点一下直接到广告主给的落地页。"
     },
     {
       "@type": "FAQPage",
@@ -35,26 +34,26 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "广告位怎么投放？",
+          "name": "怎么把广告放上去？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "打开发布页填写广告标题、描述和落地页链接，复制生成的卡片代码，粘贴到首页广告墙对应位置提交即可上线。"
+            "text": "打开发布页，填标题、描述和落地页链接，点生成代码，把那段 HTML 复制到 index.html 的广告墙里，提交后就上线。改一个字也是同样的流程。"
           }
         },
         {
           "@type": "Question",
-          "name": "支持跳转到哪些链接？",
+          "name": "链接有要求吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "支持 http 和 https 协议的网址，点击后经中转页跳转到广告主指定的落地页，其他协议会被拦截。"
+            "text": "只认 http 和 https。其他协议会被跳转页挡掉，防止有人拿 javascript: 之类的链接做手脚。"
           }
         },
         {
           "@type": "Question",
-          "name": "站点是静态的吗？需要服务器吗？",
+          "name": "站点要服务器吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "站点为纯静态页面，托管在 GitHub Pages，没有数据库和后端依赖，提交代码后自动构建发布。"
+            "text": "不用。整站是静态 HTML，放在 GitHub Pages 上，推代码就自动构建。没有数据库，点击次数只记在浏览器本地。"
           }
         }
       ]
@@ -75,24 +74,24 @@
 </header>
 
 <section class="hero">
-  <h1>把广告放在会被看见的地方</h1>
-  <p>优质广告位集中展示，点击即达落地页；支持自定义跳转链接，投放数据一目了然。</p>
+  <h1>广告位都在这页上</h1>
+  <p>每条一张卡片，点按钮直接跳到广告主自己的页面。想在下面加一条，去投放页生成卡片贴进来。</p>
   <div class="hero-actions">
-    <a class="btn primary" href="#ads">浏览广告位</a>
-    <a class="btn ghost" href="publish.html">我要投放</a>
+    <a class="btn primary" href="#ads">看看有哪些位置</a>
+    <a class="btn ghost" href="publish.html">我要加一条</a>
   </div>
 </section>
 
 <main id="ads" class="container">
-  <h2 class="section-title">在投广告位</h2>
+  <h2 class="section-title">当前广告位</h2>
   <div class="grid" id="adGrid">
 
     <article class="card" data-ad-id="demo-a">
       <div class="cover cover-a">AD</div>
       <div class="card-body">
-        <span class="tag">推荐位</span>
-        <h3>示例广告位 A</h3>
-        <p>这里是广告描述，两行以内说清楚卖点。点击按钮直达广告主落地页。</p>
+        <span class="tag">顶部位置</span>
+        <h3>第一条广告位</h3>
+        <p>占位卡片。把标题、描述和按钮里的链接换成你自己的，这张就是你的广告。</p>
         <a class="btn primary full" href="go.html?u=https%3A%2F%2Fexample.com&id=demo-a" target="_blank" rel="noopener">立即前往 →</a>
       </div>
     </article>
@@ -100,9 +99,9 @@
     <article class="card" data-ad-id="demo-b">
       <div class="cover cover-b">AD</div>
       <div class="card-body">
-        <span class="tag">热推</span>
-        <h3>示例广告位 B</h3>
-        <p>把 index.html 里的这块卡片换成你的广告，链接换成你的落地页即可。</p>
+        <span class="tag">中间位置</span>
+        <h3>第二条广告位</h3>
+        <p>文字长短不用凑，多写两行、少写两行，排版都正常。</p>
         <a class="btn primary full" href="go.html?u=https%3A%2F%2Fexample.org&id=demo-b" target="_blank" rel="noopener">立即前往 →</a>
       </div>
     </article>
@@ -110,9 +109,9 @@
     <article class="card" data-ad-id="demo-c">
       <div class="cover cover-c">AD</div>
       <div class="card-body">
-        <span class="tag">新上架</span>
-        <h3>示例广告位 C</h3>
-        <p>也可以只做纯链接投放：标题 + 一句话 + 按钮，不需要图片也一样好看。</p>
+        <span class="tag">底部位置</span>
+        <h3>第三条广告位</h3>
+        <p>不想配图也行。标题加一句话，点进去照样能到落地页。</p>
         <a class="btn primary full" href="go.html?u=https%3A%2F%2Fexample.net&id=demo-c" target="_blank" rel="noopener">立即前往 →</a>
       </div>
     </article>
@@ -122,22 +121,22 @@
 
 <section id="faq" class="container about">
   <h2 class="section-title">常见问题</h2>
-  <h3>广告位怎么投放？</h3>
-  <p>打开发布页填写广告标题、描述和落地页链接，复制生成的卡片代码，粘贴到首页广告墙对应位置提交即可上线。投放详情可以看<a href="guide.html">投放指南</a>。</p>
-  <h3>支持跳转到哪些链接？</h3>
-  <p>支持 http 和 https 协议的网址，点击后经中转页跳转到广告主指定的落地页，其他协议会被拦截。</p>
-  <h3>站点是静态的吗？需要服务器吗？</h3>
-  <p>站点为纯静态页面，托管在 GitHub Pages，没有数据库和后端依赖，提交代码后自动构建发布。</p>
+  <h3>怎么把广告放上去？</h3>
+  <p>打开发布页，填标题、描述和落地页链接，点生成代码，把那段 HTML 复制到 <code>index.html</code> 的广告墙里，提交后就上线。改一个字也是同样的流程，没有后台要登录。具体步骤写在<a href="guide.html">投放指南</a>里。</p>
+  <h3>链接有要求吗？</h3>
+  <p>只认 http 和 https。其他协议一律挡在跳转页外面，防止有人拿 <code>javascript:</code> 之类的东西做手脚。</p>
+  <h3>站点要服务器吗？</h3>
+  <p>不用。整站是静态 HTML，放在 GitHub Pages 上，推代码自动构建。没有数据库，点击次数只记在浏览器本地，用来自己看效果，不上报。</p>
 </section>
 
 <section id="about" class="container about">
   <h2 class="section-title">关于本站</h2>
-  <p>本站是一个轻量广告投放展示页：广告位以卡片形式集中呈现，访客点击后经中转页跳转到广告主指定的落地页。站点为纯静态页面，托管在 GitHub Pages，无数据库、无后端依赖。</p>
-  <p>投放方式：打开发布页生成卡片代码，粘贴进 <code>index.html</code> 的广告墙区域，提交即生效。</p>
+  <p>这站只干一件事：把几条广告位摆出来，点一下把人送到广告主给的页面。全部是静态页面，托管在 GitHub Pages，没有后端，也没有数据库。</p>
+  <p>加广告的流程就三步：发布页生成卡片、粘进 <code>index.html</code> 的广告墙、push。想改样子就改 <code>assets/style.css</code>。</p>
 </section>
 
 <footer class="footer">
-  <p>© <span id="year"></span> 广告投放中心 · 纯静态站点，托管于 GitHub Pages · <a href="guide.html">投放指南</a></p>
+  <p>© <span id="year"></span> 广告投放中心 · 静态站，托管在 GitHub Pages · <a href="guide.html">投放指南</a></p>
 </footer>
 
 <script src="assets/app.js"></script>
