@@ -4,23 +4,23 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>投放广告前，先看这几件事 · 广告投放指南</title>
-<meta name="description" content="广告位有哪几种、CPM/CPC/CPA 到底买的是什么、落地页常踩的坑，以及在这个站上架一条广告的具体步骤。都是实操，不绕弯。" />
-<meta name="keywords" content="广告投放指南,广告位类型,CPM,CPC,CPA,落地页" />
+<meta name="description" content="广告位有哪几种、CPM/CPC/CPA 到底买的是什么、落地页常踩的坑、密钥怎么用，以及在这个站上架一条广告的完整步骤。" />
+<meta name="keywords" content="广告投放指南,广告位类型,CPM,CPC,CPA,落地页,投放密钥" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://ybxj-aaa.github.io/ads-portal/guide.html" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="广告投放中心" />
 <meta property="og:title" content="投放广告前，先看这几件事" />
-<meta property="og:description" content="广告位类型、计费方式、落地页的坑，和上架步骤。" />
+<meta property="og:description" content="广告位类型、计费方式、落地页的坑、密钥怎么用，和上架步骤。" />
 <meta property="og:url" content="https://ybxj-aaa.github.io/ads-portal/guide.html" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234f8cff'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' text-anchor='middle' fill='%23071018'>A</text></svg>" />
 <link rel="stylesheet" href="assets/style.css" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "投放广告前，先看这几件事",
-  "description": "广告位类型、CPM/CPC/CPA 计费方式、落地页常踩的坑，以及在这个站上架广告的步骤。",
+  "description": "广告位类型、CPM/CPC/CPA 计费方式、落地页常踩的坑、密钥怎么用，以及在这个站上架广告的步骤。",
   "inLanguage": "zh-CN",
   "mainEntityOfPage": "https://ybxj-aaa.github.io/ads-portal/guide.html",
   "author": { "@type": "Organization", "name": "广告投放中心" },
@@ -29,55 +29,107 @@
 </script>
 </head>
 <body>
-<header class="nav">
-  <a class="brand" href="./">📣 广告投放中心</a>
-  <nav>
-    <a href="index.html#ads">广告墙</a>
-    <a href="guide.html">投放指南</a>
-    <a href="publish.html">投放广告</a>
-  </nav>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <span class="brand-mark">A</span>
+      广告投放中心
+    </a>
+    <nav class="nav">
+      <a href="index.html#ads">广告位</a>
+      <a href="index.html#plans">授权方案</a>
+      <a href="guide.html">投放指南</a>
+      <a class="btn btn-primary btn-sm" href="publish.html">我要投放</a>
+    </nav>
+  </div>
 </header>
 
-<main class="container">
-  <h1>投放广告前，先看这几件事</h1>
-  <p class="hint">写这篇是因为见过太多次：钱花出去了，才发现链接点不动，或者落地页和广告说的不是一回事。下面按顺序说，能省掉一部分试错。</p>
+<main class="wrap">
+  <article class="article">
+    <span class="eyebrow">Guide</span>
+    <h1>投放广告前，先看这几件事</h1>
+    <p class="lede">写这篇是因为见过太多次：钱花出去了，才发现链接点不动，或者落地页和广告说的不是一回事。下面按顺序说，能省掉一部分试错。</p>
 
-  <h2 class="section-title">广告位就那么几种</h2>
-  <p>图片横幅最占地方，适合活动曝光，缺点是一张图说不清细节。</p>
-  <p>卡片是标题加一句话加按钮，信息量比图大，读者能自己判断要不要点，转化一般比纯图好。</p>
-  <p>文字链只有一行字，不占地方，适合在页脚、列表里补一点曝光，指望它带量不现实。</p>
-  <p>这个站用的是卡片。三张卡的样式在 <code>assets/style.css</code> 里，想改高度或配色，动 <code>.card</code> 和 <code>.cover</code> 就行。</p>
+    <h2>广告位就那么几种</h2>
+    <p>图片横幅最占地方，适合活动曝光，缺点是一张图说不清细节。</p>
+    <p>卡片是标题加一句话加按钮，信息量比图大，读者能自己判断要不要点，转化一般比纯图好。</p>
+    <p>文字链只有一行字，不占地方，适合在页脚、列表里补一点曝光，指望它带量不现实。</p>
+    <p>这个站用的是卡片。样式在 <code>assets/style.css</code> 里，想改比例或配色，动 <code>.ad-card</code> 和 <code>.ad-cover</code> 就行。</p>
 
-  <h2 class="section-title">先搞清自己买的是什么</h2>
-  <p>CPM 按展示次数算，一千次一结。买的是曝光，点不点不管，预算好算但效果不好估。</p>
-  <p>CPC 按点击算，没点就不花钱。适合刚起步先测效果，点击率能接受再加预算。</p>
-  <p>CPA 按注册、下单这类动作算。对广告主最划算，但对落地页和产品要求最高，转化差一点就没人愿意投。</p>
-  <p>刚开始别急着包月。先跑几百次点击，看看点击率和停留时间，数据不行就换素材，比加钱有用。</p>
+    <h2>先搞清自己买的是什么</h2>
+    <p><strong>CPM</strong> 按展示次数算，一千次一结。买的是曝光，点不点不管，预算好算但效果不好估。</p>
+    <p><strong>CPC</strong> 按点击算，没点就不花钱。适合刚起步先测效果，点击率能接受再加预算。</p>
+    <p><strong>CPA</strong> 按注册、下单这类动作算。对广告主最划算，但对落地页和产品要求最高。</p>
+    <p>刚开始别急着包月。先跑几百次点击，看看点击率和停留时间，数据不行就换素材，比加钱有用。</p>
 
-  <h2 class="section-title">落地页最容易出问题</h2>
-  <p>广告写“限时五折”，点进去是首页——这么干，进来的人一半会直接走。</p>
-  <p>手机上打不开、三秒还没出内容，比文案写得差更致命。投放前拿自己的手机点一遍，这一步别省。</p>
-  <p>链接尽量走 https，跳转前带个来源参数，像 <code>?from=ad</code> 这种，回头能对上账。</p>
-  <p>这个站的 <code>go.html</code> 只放行 http 和 https。别的协议会被判无效，页面上会显示“链接无效”，不会跳出去。</p>
+    <h2>落地页最容易出问题</h2>
+    <p>广告写“限时五折”，点进去是首页——这么干，进来的人一半会直接走。</p>
+    <p>手机上打不开、三秒还没出内容，比文案写得差更致命。投放前拿自己的手机点一遍，这一步别省。</p>
+    <p>链接尽量走 https，跳转前带个来源参数，像 <code>?from=ad</code> 这种，回头能对上账。</p>
 
-  <h2 class="section-title">在这个站加一条广告</h2>
-  <p>1. 打开发布页，填广告 ID（英文，随便起，用来记点击）、角标、标题、描述、落地页链接。</p>
-  <p>2. 点“生成代码”，把生成的那段 <code>article</code> 复制下来。</p>
-  <p>3. 打开 <code>index.html</code>，找到 <code>&lt;div class="grid" id="adGrid"&gt;</code>，粘在最后一张卡后面。</p>
-  <p>4. 提交。GitHub Actions 会自动构建，一分钟左右页面就更新。</p>
-  <p>5. 点一遍卡片，确认跳转没被挡、落地页能打开。</p>
+    <div class="callout">
+      <p>本站的 <code>go.html</code> 只放行 http 和 https。别的协议会被判无效，页面上显示“链接无效”，不会跳出去。</p>
+    </div>
 
-  <h2 class="section-title">几条实际经验</h2>
-  <p>一次只改一张卡，改完立刻看一眼。三张一起改，出了问题不知道是哪张的。</p>
-  <p>描述别写满，留半行空白比塞满好读。</p>
-  <p>文案用大白话。“赋能”“一站式”这种词，读者一眼就知道是套模板，点击率不会好看。</p>
-  <p>广告内容要真。虚假宣传、诱导下载这类，被举报一次，站就不好过了。</p>
+    <h2>密钥怎么用</h2>
+    <p>投放页是锁着的，要输入密钥才能生成卡片。密钥是一串 <code>ADS-XXXX-XXXX-XXXX-XXXX</code>，买的时候按有效期选：7 天、1 个月、3 个月、6 个月、1 年、长期。</p>
+    <p>有效期从签发那天开始算，到期后投放页会重新锁上。要续期就找 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">TG @tg7879</a> 换新密钥，旧密钥不会自动延期。</p>
+    <p>验证只需要一次，同一个浏览会话里不用反复输入；关掉浏览器再开就要重新验。</p>
+    <p>站点里只存密钥的哈希，不存明文。换句话说，密钥丢了没法找回，只能重新签发。</p>
 
-  <p><a class="btn primary" href="publish.html">去生成广告卡片</a></p>
+    <h2>在这个站加一条广告</h2>
+    <ol>
+      <li>打开投放页，点“输入密钥”，粘贴密钥。</li>
+      <li>验证通过后填广告 ID（英文，随便起）、角标、标题、描述、落地页链接。</li>
+      <li>点“生成代码”，复制那段 <code>article</code>。</li>
+      <li>打开 <code>index.html</code>，找到 <code>&lt;div class="ad-grid" data-ad-grid&gt;</code>，粘在最后一张卡后面。</li>
+      <li>提交。GitHub Actions 自动构建，一两分钟页面就更新。</li>
+      <li>点一遍卡片，确认跳转没被挡、落地页能打开。</li>
+    </ol>
+
+    <h2>几条实际经验</h2>
+    <p>一次只改一张卡，改完立刻看一眼。三张一起改，出了问题不知道是哪张的。</p>
+    <p>描述别写满，留半行空白比塞满好读。</p>
+    <p>文案用大白话。“赋能”“一站式”这种词，读者一眼就知道是套模板，点击率不会好看。</p>
+    <p>广告内容要真。虚假宣传、诱导下载这类，被举报一次，站就不好过了。</p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="publish.html">去投放页</a>
+      <a class="btn btn-ghost" href="https://t.me/tg7879" target="_blank" rel="noopener">买密钥 @tg7879</a>
+    </div>
+  </article>
 </main>
 
-<footer class="footer">
-  <p>© <span id="year"></span> 广告投放中心 · 静态站，托管在 GitHub Pages</p>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="./"><span class="brand-mark">A</span>广告投放中心</a>
+        <p style="margin-top:12px;">静态广告位展示站，托管在 GitHub Pages。投放凭密钥，到期自动失效。</p>
+      </div>
+      <div>
+        <h3>导航</h3>
+        <div class="footer-links">
+          <a href="index.html#ads">广告位</a>
+          <a href="index.html#plans">授权方案</a>
+          <a href="guide.html">投放指南</a>
+          <a href="publish.html">投放页</a>
+        </div>
+      </div>
+      <div>
+        <h3>联系</h3>
+        <div class="footer-links">
+          <a href="https://t.me/tg7879" target="_blank" rel="noopener">Telegram @tg7879</a>
+          <a href="sitemap.xml">站点地图</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> 广告投放中心</span>
+      <span>静态站 · GitHub Pages</span>
+    </div>
+  </div>
 </footer>
 
 <script src="assets/app.js"></script>

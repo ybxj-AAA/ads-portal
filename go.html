@@ -5,13 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
 <title>正在跳转…</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234f8cff'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' text-anchor='middle' fill='%23071018'>A</text></svg>" />
 <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
 <div class="redirect">
-  <div class="spinner"></div>
-  <h2 id="title">正在前往广告主页面…</h2>
-  <p class="hint">如果没有自动跳转，<a id="manual" href="#" rel="noopener">点这里继续</a>。</p>
+  <div class="redirect-inner">
+    <div class="spinner"></div>
+    <h1 id="title">正在前往广告主页面…</h1>
+    <p id="hint">如果没有自动跳转，<a class="tg-link" id="manual" href="#">点这里继续</a>。</p>
+  </div>
 </div>
 
 <script>
@@ -26,7 +29,7 @@
 
   var target = getParam('u');
 
-  // 只允许 http/https，避免 javascript: 等危险协议
+  // 只放行 http/https，避免 javascript: 之类的协议
   var safe = false;
   try {
     var parsed = new URL(target);
@@ -35,7 +38,7 @@
 
   if (!safe) {
     title.textContent = '链接无效';
-    manual.textContent = '返回广告墙';
+    manual.textContent = '回广告墙';
     manual.href = './';
     return;
   }
@@ -45,10 +48,9 @@
     var key = 'adclick:' + (id || target);
     var n = parseInt(localStorage.getItem(key) || '0', 10) + 1;
     localStorage.setItem(key, String(n));
-  } catch (e) { /* ignore */ }
+  } catch (e) { /* 隐私模式忽略 */ }
 
   manual.href = target;
-
   setTimeout(function () { location.replace(target); }, 400);
 })();
 </script>

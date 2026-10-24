@@ -3,75 +3,161 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>投放广告 · 生成广告卡片代码</title>
-<meta name="description" content="填标题、描述和落地页链接，生成一段卡片 HTML，粘到首页广告墙就上线。纯静态站，不用后台。" />
+<title>投放页 · 输入密钥生成广告卡片</title>
+<meta name="description" content="输入投放密钥后生成广告卡片代码，粘到首页广告墙就上线。密钥有效期 7 天到长期，购买联系 Telegram @tg7879。" />
 <meta name="robots" content="noindex, follow" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234f8cff'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' text-anchor='middle' fill='%23071018'>A</text></svg>" />
 <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-<header class="nav">
-  <a class="brand" href="./">📣 广告投放中心</a>
-  <nav>
-    <a href="index.html#ads">广告墙</a>
-    <a href="guide.html">投放指南</a>
-    <a href="publish.html">投放广告</a>
-  </nav>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <span class="brand-mark">A</span>
+      广告投放中心
+    </a>
+    <nav class="nav">
+      <a href="index.html#ads">广告位</a>
+      <a href="index.html#plans">授权方案</a>
+      <a href="guide.html">投放指南</a>
+      <a class="btn btn-primary btn-sm" href="publish.html">投放页</a>
+    </nav>
+  </div>
 </header>
 
-<main class="container">
-  <h1 class="section-title">生成广告卡片</h1>
-  <p class="hint">填完点“生成代码”，把结果粘进 <code>index.html</code> 的广告墙区域（<code>id="adGrid"</code> 那个 div），提交后一分钟左右上线。</p>
+<main class="wrap" data-publish>
+  <div class="page-head">
+    <span class="eyebrow">Publish</span>
+    <h1>投放页</h1>
+    <p>先验证密钥，再生成广告卡片。验证一次，本次浏览会话内有效。</p>
+  </div>
 
-  <form class="form" id="form">
-    <div class="field">
-      <label for="id">广告 ID（英文，用于统计点击）</label>
-      <input id="id" name="id" placeholder="如 shop-a" required />
-    </div>
-    <div class="field">
-      <label for="tag">角标文字</label>
-      <input id="tag" name="tag" placeholder="如 推荐位 / 热推 / 新上架" />
-    </div>
-    <div class="field">
-      <label for="title">广告标题</label>
-      <input id="title" name="title" placeholder="如 XX 商城限时活动" required />
-    </div>
-    <div class="field">
-      <label for="desc">广告描述（一句到两句）</label>
-      <textarea id="desc" name="desc" placeholder="20-40 字说清卖点"></textarea>
-    </div>
-    <div class="field">
-      <label for="url">落地页链接（http/https）</label>
-      <input id="url" name="url" placeholder="https://你的落地页" required />
-    </div>
-    <div class="field">
-      <label for="cover">封面色</label>
-      <select id="cover" name="cover" style="width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#0e1522;color:var(--ink)">
-        <option value="cover-a">蓝青</option>
-        <option value="cover-b">紫粉</option>
-        <option value="cover-c">墨绿</option>
-      </select>
-    </div>
-    <div>
-      <button class="btn primary" type="submit">生成代码</button>
-      <button class="btn ghost" type="button" id="copyBtn">复制</button>
-    </div>
-  </form>
+  <div class="key-status" data-key-status>
+    <span>已授权：<b data-key-plan>—</b> <span data-key-exp></span></span>
+    <button class="btn btn-ghost btn-sm" type="button" data-key-reset>换密钥</button>
+  </div>
 
-  <h2 class="section-title">生成的代码</h2>
-  <pre class="output" id="output">填好上面的表单后点“生成代码”。</pre>
+  <div class="publish-layout">
+    <section class="card-panel">
+      <div class="gate">
+        <div class="gate-icon">🔑</div>
+        <h2>需要投放密钥</h2>
+        <p>输入密钥后解锁下面的生成器。有效期分 7 天、1 个月、3 个月、6 个月、1 年和长期，购买或续期联系 TG <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a>。</p>
+        <div><button class="btn btn-primary" type="button" data-key-open>输入密钥</button></div>
+      </div>
+
+      <div class="publish-main">
+        <form id="adForm" class="form-grid" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="adId">广告 ID</label>
+              <input id="adId" type="text" placeholder="shop-a" required />
+              <span class="hint">英文，用来记点击，别和现有卡片重复</span>
+            </div>
+            <div class="field">
+              <label for="adTag">角标</label>
+              <input id="adTag" type="text" placeholder="顶部位置 / 热推" />
+              <span class="hint">左上角那行小字</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="adTitle">标题</label>
+            <input id="adTitle" type="text" placeholder="XX 商城限时活动" required />
+          </div>
+
+          <div class="field">
+            <label for="adDesc">描述</label>
+            <textarea id="adDesc" placeholder="一两句话说清卖点，别写满"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="adUrl">落地页链接</label>
+            <input id="adUrl" type="text" placeholder="https://你的落地页" required />
+            <span class="hint">只支持 http / https，其他协议会被跳转页拦下</span>
+          </div>
+
+          <div class="field">
+            <label for="adCover">封面色</label>
+            <select id="adCover">
+              <option value="cover-blue">蓝青</option>
+              <option value="cover-violet">紫粉</option>
+              <option value="cover-green">墨绿</option>
+            </select>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="submit">生成代码</button>
+            <button class="btn btn-ghost" type="reset">清空</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <aside class="card-panel">
+      <h2 style="margin:0 0 6px;font-size:16px;">生成的代码</h2>
+      <p class="hint" style="margin:0 0 14px;">贴进 <code>index.html</code> 的广告墙里（<code>data-ad-grid</code> 那个容器），提交后自动发布。</p>
+      <pre class="output" id="output">填完表单点“生成代码”，这里会出现一段 HTML。</pre>
+      <div class="hero-actions" style="margin-top:14px;">
+        <button class="btn btn-ghost btn-sm" type="button" id="copyBtn">复制代码</button>
+        <a class="btn btn-ghost btn-sm" href="guide.html">看投放指南</a>
+      </div>
+
+      <h2 style="margin:26px 0 10px;font-size:16px;">提交之后</h2>
+      <ol class="hint" style="margin:0;padding-left:18px;line-height:1.8;">
+        <li>GitHub Actions 自动构建，一两分钟页面更新。</li>
+        <li>点一遍新卡片，确认跳转没被拦。</li>
+        <li>落地页最好用 https，手机能打开。</li>
+      </ol>
+
+      <h2 style="margin:26px 0 10px;font-size:16px;">密钥说明</h2>
+      <p class="hint" style="margin:0;">一次验证，当前浏览会话内有效，关掉浏览器要重新输入。有效期从签发日算起，到期后这里会重新锁上。续期找 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a>。</p>
+    </aside>
+  </div>
 </main>
 
-<footer class="footer">
-  <p>© <span id="year"></span> 广告投放中心</p>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="margin-top:0;border-top:0;padding-top:0;">
+      <span>© <span data-year>2026</span> 广告投放中心</span>
+      <span>密钥购买与续期：<a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">Telegram @tg7879</a></span>
+    </div>
+  </div>
 </footer>
 
+<div class="modal" data-key-modal aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="keyModalTitle">
+    <div class="modal-head">
+      <h2 id="keyModalTitle">输入投放密钥</h2>
+      <button class="modal-close" data-modal-close type="button" aria-label="关闭">✕</button>
+    </div>
+    <p class="modal-sub">验证通过后解锁生成器，本次浏览会话内有效。</p>
+    <form novalidate>
+      <div class="field">
+        <label for="keyInput">密钥</label>
+        <input id="keyInput" data-key-input type="text" placeholder="ADS-XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" />
+        <span class="hint">不区分大小写，空格和横杠会自动忽略。</span>
+      </div>
+      <p class="modal-msg" data-key-msg></p>
+      <button class="btn btn-primary btn-block" data-key-submit type="submit">验证并继续</button>
+    </form>
+    <div class="modal-foot">
+      <span>还没有密钥？</span>
+      <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">TG @tg7879 →</a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/keys.js"></script>
+<script src="assets/app.js"></script>
 <script>
 (function () {
-  document.getElementById('year').textContent = new Date().getFullYear();
+  'use strict';
 
-  var form = document.getElementById('form');
+  var form = document.getElementById('adForm');
   var output = document.getElementById('output');
+  var copyBtn = document.getElementById('copyBtn');
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -81,23 +167,36 @@
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var id = document.getElementById('id').value.trim();
-    var tag = document.getElementById('tag').value.trim() || '广告位';
-    var title = document.getElementById('title').value.trim();
-    var desc = document.getElementById('desc').value.trim();
-    var url = document.getElementById('url').value.trim();
-    var cover = document.getElementById('cover').value;
+    var id = document.getElementById('adId').value.trim();
+    var tag = document.getElementById('adTag').value.trim() || '广告位';
+    var title = document.getElementById('adTitle').value.trim();
+    var desc = document.getElementById('adDesc').value.trim();
+    var url = document.getElementById('adUrl').value.trim();
+    var cover = document.getElementById('adCover').value;
+
+    if (!id || !title || !url) {
+      output.textContent = '广告 ID、标题、落地页链接都要填。';
+      return;
+    }
+
+    if (!/^https?:\/\//i.test(url)) {
+      output.textContent = '链接必须以 http:// 或 https:// 开头，否则跳转页会拦下来。';
+      return;
+    }
 
     var href = 'go.html?u=' + encodeURIComponent(url) + '&id=' + encodeURIComponent(id);
 
     var html = [
-      '<article class="card" data-ad-id="' + esc(id) + '">',
-      '  <div class="cover ' + esc(cover) + '">AD</div>',
-      '  <div class="card-body">',
-      '    <span class="tag">' + esc(tag) + '</span>',
+      '<article class="ad-card" data-ad-id="' + esc(id) + '">',
+      '  <div class="ad-cover ' + esc(cover) + '">',
+      '    <span class="ad-tag">' + esc(tag) + '</span>',
+      '    <span class="mark">AD</span>',
+      '  </div>',
+      '  <div class="ad-body">',
       '    <h3>' + esc(title) + '</h3>',
       '    <p>' + esc(desc) + '</p>',
-      '    <a class="btn primary full" href="' + esc(href) + '" target="_blank" rel="noopener">立即前往 →</a>',
+      '    <div class="ad-meta"><span>' + esc(tag) + '</span><span>·</span><span>点击计本地</span></div>',
+      '    <a class="btn btn-primary btn-block" href="' + esc(href) + '" target="_blank" rel="noopener">立即前往 →</a>',
       '  </div>',
       '</article>'
     ].join('\n');
@@ -105,12 +204,15 @@
     output.textContent = html;
   });
 
-  document.getElementById('copyBtn').addEventListener('click', function () {
+  copyBtn.addEventListener('click', function () {
     var text = output.textContent;
     if (!text) return;
     navigator.clipboard.writeText(text).then(function () {
-      document.getElementById('copyBtn').textContent = '已复制';
-      setTimeout(function () { document.getElementById('copyBtn').textContent = '复制'; }, 1500);
+      copyBtn.textContent = '已复制';
+      setTimeout(function () { copyBtn.textContent = '复制代码'; }, 1500);
+    }).catch(function () {
+      copyBtn.textContent = '复制失败，手动选中';
+      setTimeout(function () { copyBtn.textContent = '复制代码'; }, 2000);
     });
   });
 })();

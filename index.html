@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>广告投放中心 · 广告位展示与直达链接</title>
-<meta name="description" content="这里摆着几条广告位，点“立即前往”直接跳到广告主给的落地页。想放自己的广告，去投放页生成卡片粘进来就行。整站静态，托管在 GitHub Pages。" />
-<meta name="keywords" content="广告投放,广告位,链接推广,广告合作,落地页" />
+<title>广告投放中心 · 广告位展示与密钥投放</title>
+<meta name="description" content="三条广告位，卡片式展示，点“立即前往”直接跳到广告主落地页。投放需要授权密钥，可选 7 天、1 个月、3 个月、6 个月、1 年和长期。整站静态，GitHub Pages 托管。" />
+<meta name="keywords" content="广告投放,广告位,密钥授权,链接推广,落地页,广告合作" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://ybxj-aaa.github.io/ads-portal/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="广告投放中心" />
-<meta property="og:title" content="广告投放中心 · 广告位展示与直达链接" />
-<meta property="og:description" content="几条广告位，点一下直接到广告主给的落地页。" />
+<meta property="og:title" content="广告投放中心 · 广告位展示与密钥投放" />
+<meta property="og:description" content="三条广告位，点一下直达落地页。投放凭密钥，7 天到长期都有。" />
 <meta property="og:url" content="https://ybxj-aaa.github.io/ads-portal/" />
 <meta property="og:locale" content="zh_CN" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234f8cff'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' text-anchor='middle' fill='%23071018'>A</text></svg>" />
 <link rel="stylesheet" href="assets/style.css" />
 <script type="application/ld+json">
 {
@@ -26,7 +26,7 @@
       "name": "广告投放中心",
       "url": "https://ybxj-aaa.github.io/ads-portal/",
       "inLanguage": "zh-CN",
-      "description": "几条广告位，点一下直接到广告主给的落地页。"
+      "description": "三条广告位，点一下直达广告主落地页。投放凭密钥，有效期从 7 天到长期。"
     },
     {
       "@type": "FAQPage",
@@ -34,26 +34,34 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "怎么把广告放上去？",
+          "name": "投放广告需要什么？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "打开发布页，填标题、描述和落地页链接，点生成代码，把那段 HTML 复制到 index.html 的广告墙里，提交后就上线。改一个字也是同样的流程。"
+            "text": "需要一个投放密钥。在投放页点“输入密钥”，验证通过后就能生成广告卡片。密钥区分有效期：7 天、1 个月、3 个月、6 个月、1 年、长期。"
           }
         },
         {
           "@type": "Question",
-          "name": "链接有要求吗？",
+          "name": "密钥怎么买？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "只认 http 和 https。其他协议会被跳转页挡掉，防止有人拿 javascript: 之类的链接做手脚。"
+            "text": "联系 Telegram @tg7879 说明要哪种有效期，拿到密钥后到投放页输入即可。到期后自动失效，续期也是同一个渠道。"
           }
         },
         {
           "@type": "Question",
-          "name": "站点要服务器吗？",
+          "name": "密钥能重复用吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "不用。整站是静态 HTML，放在 GitHub Pages 上，推代码就自动构建。没有数据库，点击次数只记在浏览器本地。"
+            "text": "一个密钥对应一次授权，有效期从签发日开始算。密钥只存哈希，站点后台看不到明文，弄丢了只能重新签发。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "广告链接有要求吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "只放行 http 和 https。其他协议会被跳转页拦下，防止 javascript: 这类链接。"
           }
         }
       ]
@@ -63,82 +71,268 @@
 </script>
 </head>
 <body>
-<header class="nav">
-  <a class="brand" href="./">📣 广告投放中心</a>
-  <nav>
-    <a href="#ads">广告墙</a>
-    <a href="guide.html">投放指南</a>
-    <a href="publish.html">投放广告</a>
-    <a href="#about">关于</a>
-  </nav>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <span class="brand-mark">A</span>
+      广告投放中心
+    </a>
+    <nav class="nav">
+      <a href="#ads">广告位</a>
+      <a href="#plans">授权方案</a>
+      <a href="guide.html">投放指南</a>
+      <a class="btn btn-primary btn-sm" href="publish.html" data-key-open>我要投放</a>
+    </nav>
+  </div>
 </header>
 
-<section class="hero">
-  <h1>广告位都在这页上</h1>
-  <p>每条一张卡片，点按钮直接跳到广告主自己的页面。想在下面加一条，去投放页生成卡片贴进来。</p>
-  <div class="hero-actions">
-    <a class="btn primary" href="#ads">看看有哪些位置</a>
-    <a class="btn ghost" href="publish.html">我要加一条</a>
-  </div>
-</section>
-
-<main id="ads" class="container">
-  <h2 class="section-title">当前广告位</h2>
-  <div class="grid" id="adGrid">
-
-    <article class="card" data-ad-id="demo-a">
-      <div class="cover cover-a">AD</div>
-      <div class="card-body">
-        <span class="tag">顶部位置</span>
-        <h3>第一条广告位</h3>
-        <p>占位卡片。把标题、描述和按钮里的链接换成你自己的，这张就是你的广告。</p>
-        <a class="btn primary full" href="go.html?u=https%3A%2F%2Fexample.com&id=demo-a" target="_blank" rel="noopener">立即前往 →</a>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="pill"><span class="dot"></span>密钥授权 · 到期自动失效</span>
+      <h1>你的广告，<em>挂在这页上</em></h1>
+      <p class="hero-lead">三条广告位，卡片式展示。访客点“立即前往”，经中转页直达你的落地页，只放行 http 和 https。投放要密钥，有效期最短 7 天，最长长期。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="publish.html" data-key-open>输入密钥，开始投放</a>
+        <a class="btn btn-ghost" href="#ads">先看看位置</a>
       </div>
-    </article>
+      <p class="hero-note">没有密钥？联系 Telegram <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a></p>
 
-    <article class="card" data-ad-id="demo-b">
-      <div class="cover cover-b">AD</div>
-      <div class="card-body">
-        <span class="tag">中间位置</span>
-        <h3>第二条广告位</h3>
-        <p>文字长短不用凑，多写两行、少写两行，排版都正常。</p>
-        <a class="btn primary full" href="go.html?u=https%3A%2F%2Fexample.org&id=demo-b" target="_blank" rel="noopener">立即前往 →</a>
+      <div class="stats">
+        <div class="stat"><b>3</b><span>在投广告位</span></div>
+        <div class="stat"><b>6 档</b><span>密钥有效期</span></div>
+        <div class="stat"><b>1–2 分钟</b><span>提交到上线</span></div>
       </div>
-    </article>
+    </div>
+  </section>
 
-    <article class="card" data-ad-id="demo-c">
-      <div class="cover cover-c">AD</div>
-      <div class="card-body">
-        <span class="tag">底部位置</span>
-        <h3>第三条广告位</h3>
-        <p>不想配图也行。标题加一句话，点进去照样能到落地页。</p>
-        <a class="btn primary full" href="go.html?u=https%3A%2F%2Fexample.net&id=demo-c" target="_blank" rel="noopener">立即前往 →</a>
+  <section class="section" id="ads">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Ad slots</span>
+        <h2>当前在投的广告位</h2>
+        <p>每张卡片一条广告。现在是占位内容，换成你的标题、描述和链接就能用。</p>
       </div>
-    </article>
 
-  </div>
+      <div class="ad-grid" data-ad-grid>
+        <article class="ad-card" data-ad-id="demo-a">
+          <div class="ad-cover cover-blue">
+            <span class="ad-tag">顶部位置</span>
+            <span class="mark">AD</span>
+          </div>
+          <div class="ad-body">
+            <h3>第一条广告位</h3>
+            <p>占位卡片。把标题、描述和按钮里的链接换成你自己的，这张就是你的广告。</p>
+            <div class="ad-meta"><span>推荐位</span><span>·</span><span>点击计本地</span></div>
+            <a class="btn btn-primary btn-block" href="go.html?u=https%3A%2F%2Fexample.com&amp;id=demo-a" target="_blank" rel="noopener">立即前往 →</a>
+          </div>
+        </article>
+
+        <article class="ad-card" data-ad-id="demo-b">
+          <div class="ad-cover cover-violet">
+            <span class="ad-tag">中间位置</span>
+            <span class="mark">AD</span>
+          </div>
+          <div class="ad-body">
+            <h3>第二条广告位</h3>
+            <p>文字长短不用凑，多写两行、少写两行，排版都正常。</p>
+            <div class="ad-meta"><span>推荐位</span><span>·</span><span>点击计本地</span></div>
+            <a class="btn btn-primary btn-block" href="go.html?u=https%3A%2F%2Fexample.org&amp;id=demo-b" target="_blank" rel="noopener">立即前往 →</a>
+          </div>
+        </article>
+
+        <article class="ad-card" data-ad-id="demo-c">
+          <div class="ad-cover cover-green">
+            <span class="ad-tag">底部位置</span>
+            <span class="mark">AD</span>
+          </div>
+          <div class="ad-body">
+            <h3>第三条广告位</h3>
+            <p>不想配图也行。标题加一句话，点进去照样能到落地页。</p>
+            <div class="ad-meta"><span>推荐位</span><span>·</span><span>点击计本地</span></div>
+            <a class="btn btn-primary btn-block" href="go.html?u=https%3A%2F%2Fexample.net&amp;id=demo-c" target="_blank" rel="noopener">立即前往 →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="plans">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Access key</span>
+        <h2>密钥有效期</h2>
+        <p>按需要买，从 7 天试水到长期占用位置。有效期从签发日算起，到期后投放页直接锁住，续期换新密钥。</p>
+      </div>
+
+      <div class="plan-grid">
+        <div class="plan">
+          <span class="plan-name">短期</span>
+          <span class="plan-days">7<small>天</small></span>
+          <ul><li>1 条广告位</li><li>可改标题与链接</li></ul>
+          <div class="plan-foot">适合先试效果</div>
+        </div>
+
+        <div class="plan featured">
+          <span class="plan-badge">常用</span>
+          <span class="plan-name">短期</span>
+          <span class="plan-days">1<small>个月</small></span>
+          <ul><li>1 条广告位</li><li>可改标题与链接</li></ul>
+          <div class="plan-foot">联系 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a></div>
+        </div>
+
+        <div class="plan">
+          <span class="plan-name">中期</span>
+          <span class="plan-days">3<small>个月</small></span>
+          <ul><li>1 条广告位</li><li>期间可换素材</li></ul>
+          <div class="plan-foot">联系 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a></div>
+        </div>
+
+        <div class="plan">
+          <span class="plan-name">中期</span>
+          <span class="plan-days">6<small>个月</small></span>
+          <ul><li>1 条广告位</li><li>期间可换素材</li></ul>
+          <div class="plan-foot">联系 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a></div>
+        </div>
+
+        <div class="plan">
+          <span class="plan-name">长期</span>
+          <span class="plan-days">1<small>年</small></span>
+          <ul><li>1 条广告位</li><li>不限次换素材</li></ul>
+          <div class="plan-foot">联系 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a></div>
+        </div>
+
+        <div class="plan">
+          <span class="plan-name">长期</span>
+          <span class="plan-days">长期<small>不过期</small></span>
+          <ul><li>1 条广告位</li><li>不限次换素材</li></ul>
+          <div class="plan-foot">联系 <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a></div>
+        </div>
+      </div>
+
+      <div class="key-note">
+        <p>要买密钥、续期、或者不知道选哪档，直接问 TG：<a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a></p>
+        <a class="btn btn-ghost btn-sm" href="https://t.me/tg7879" target="_blank" rel="noopener">联系卖家 →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Workflow</span>
+        <h2>投放就四步</h2>
+        <p>拿到密钥之后，剩下的操作都在浏览器里完成，不用装东西。</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>拿到密钥</h3>
+          <p>联系 @tg7879，说明要哪种有效期，付款后收到形如 ADS-XXXX-… 的字符串。</p>
+        </div>
+        <div class="step">
+          <h3>验证密钥</h3>
+          <p>点“我要投放”，弹窗里粘贴密钥。验证通过会显示套餐和到期日。</p>
+        </div>
+        <div class="step">
+          <h3>生成卡片</h3>
+          <p>填标题、描述、落地页链接，点生成，复制那段 HTML。</p>
+        </div>
+        <div class="step">
+          <h3>提交上线</h3>
+          <p>把代码贴进首页广告墙，提交后由自动部署发布，一两分钟生效。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">FAQ</span>
+        <h2>常见问题</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>投放广告需要什么？</summary>
+          <div class="answer"><p>需要一个投放密钥。在投放页点“输入密钥”，验证通过后就能生成广告卡片。有效期分 7 天、1 个月、3 个月、6 个月、1 年和长期。</p></div>
+        </details>
+        <details>
+          <summary>密钥怎么买？</summary>
+          <div class="answer"><p>联系 Telegram <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">@tg7879</a>，说明要哪种有效期，拿到密钥后到投放页输入即可。到期后自动失效，续期也是同一个渠道。</p></div>
+        </details>
+        <details>
+          <summary>密钥能重复用吗？</summary>
+          <div class="answer"><p>一个密钥对应一次授权，有效期从签发日算起。站点只存密钥的哈希，后台看不到明文，弄丢了只能重新签发。</p></div>
+        </details>
+        <details>
+          <summary>广告链接有要求吗？</summary>
+          <div class="answer"><p>只放行 http 和 https。其他协议会被跳转页拦下，防止 <code>javascript:</code> 这类链接。</p></div>
+        </details>
+        <details>
+          <summary>站点需要服务器吗？</summary>
+          <div class="answer"><p>不用。整站是静态 HTML，放在 GitHub Pages 上，推代码自动构建，没有数据库。点击数只记在访问者浏览器本地。</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
 </main>
 
-<section id="faq" class="container about">
-  <h2 class="section-title">常见问题</h2>
-  <h3>怎么把广告放上去？</h3>
-  <p>打开发布页，填标题、描述和落地页链接，点生成代码，把那段 HTML 复制到 <code>index.html</code> 的广告墙里，提交后就上线。改一个字也是同样的流程，没有后台要登录。具体步骤写在<a href="guide.html">投放指南</a>里。</p>
-  <h3>链接有要求吗？</h3>
-  <p>只认 http 和 https。其他协议一律挡在跳转页外面，防止有人拿 <code>javascript:</code> 之类的东西做手脚。</p>
-  <h3>站点要服务器吗？</h3>
-  <p>不用。整站是静态 HTML，放在 GitHub Pages 上，推代码自动构建。没有数据库，点击次数只记在浏览器本地，用来自己看效果，不上报。</p>
-</section>
-
-<section id="about" class="container about">
-  <h2 class="section-title">关于本站</h2>
-  <p>这站只干一件事：把几条广告位摆出来，点一下把人送到广告主给的页面。全部是静态页面，托管在 GitHub Pages，没有后端，也没有数据库。</p>
-  <p>加广告的流程就三步：发布页生成卡片、粘进 <code>index.html</code> 的广告墙、push。想改样子就改 <code>assets/style.css</code>。</p>
-</section>
-
-<footer class="footer">
-  <p>© <span id="year"></span> 广告投放中心 · 静态站，托管在 GitHub Pages · <a href="guide.html">投放指南</a></p>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="./"><span class="brand-mark">A</span>广告投放中心</a>
+        <p style="margin-top:12px;">静态广告位展示站，托管在 GitHub Pages。投放凭密钥，到期自动失效。</p>
+      </div>
+      <div>
+        <h3>导航</h3>
+        <div class="footer-links">
+          <a href="#ads">广告位</a>
+          <a href="#plans">授权方案</a>
+          <a href="guide.html">投放指南</a>
+          <a href="publish.html">投放页</a>
+        </div>
+      </div>
+      <div>
+        <h3>联系</h3>
+        <div class="footer-links">
+          <a href="https://t.me/tg7879" target="_blank" rel="noopener">Telegram @tg7879</a>
+          <a href="sitemap.xml">站点地图</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> 广告投放中心</span>
+      <span>静态站 · GitHub Pages</span>
+    </div>
+  </div>
 </footer>
 
+<div class="modal" data-key-modal aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="keyModalTitle">
+    <div class="modal-head">
+      <h2 id="keyModalTitle">输入投放密钥</h2>
+      <button class="modal-close" data-modal-close type="button" aria-label="关闭">✕</button>
+    </div>
+    <p class="modal-sub">投放需要授权密钥，验证通过后进入投放页。有效期分 7 天、1 个月、3 个月、6 个月、1 年和长期。</p>
+    <form novalidate>
+      <div class="field">
+        <label for="keyInput">密钥</label>
+        <input id="keyInput" data-key-input type="text" placeholder="ADS-XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" />
+        <span class="hint">不区分大小写，空格和横杠会自动忽略。</span>
+      </div>
+      <p class="modal-msg" data-key-msg></p>
+      <button class="btn btn-primary btn-block" data-key-submit type="submit">验证并继续</button>
+    </form>
+    <div class="modal-foot">
+      <span>还没有密钥？</span>
+      <a class="tg-link" href="https://t.me/tg7879" target="_blank" rel="noopener">TG @tg7879 →</a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/keys.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>
