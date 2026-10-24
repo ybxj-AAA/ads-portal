@@ -1,4 +1,4 @@
-/* 广告投放中心 — 页面交互与密钥校验 */
+﻿/* 广告投放中心 — 页面交互与密钥校验 */
 (function () {
   'use strict';
 
@@ -253,6 +253,38 @@
     if (!grid || !out) return;
     out.textContent = String(grid.querySelectorAll('.ad-card').length);
   }
+  function initCardClick() {
+    var grid = document.querySelector('[data-ad-grid]');
+    if (!grid) return;
+
+    grid.querySelectorAll('.ad-card').forEach(function (card) {
+      var link = card.querySelector('a.ad-link');
+      if (!link) return;
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'link');
+      var h3 = card.querySelector('h3');
+      card.setAttribute('aria-label', (h3 ? h3.textContent : '广告') + ' —— 打开落地页');
+    });
+
+    grid.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;
+      var card = e.target.closest('.ad-card');
+      if (!card) return;
+      var link = card.querySelector('a.ad-link');
+      if (!link) return;
+      window.open(link.href, '_blank', 'noopener');
+    });
+
+    grid.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var card = e.target.closest('.ad-card');
+      if (!card) return;
+      var link = card.querySelector('a.ad-link');
+      if (!link) return;
+      e.preventDefault();
+      window.open(link.href, '_blank', 'noopener');
+    });
+  }
   function initClickCount() {
     var grid = document.querySelector('[data-ad-grid]');
     if (!grid) return;
@@ -326,6 +358,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     initYear();
     initAdCount();
+    initCardClick();
     initClickCount();
     if (document.querySelector('[data-publish]')) {
       initPublish();
