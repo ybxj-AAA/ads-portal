@@ -272,7 +272,8 @@
       if (!card) return;
       var link = card.querySelector('a.ad-link');
       if (!link) return;
-      window.open(link.href, '_blank', 'noopener');
+      var w = window.open(link.href, '_blank', 'noopener');
+      if (!w) window.location.href = link.href;
     });
 
     grid.addEventListener('keydown', function (e) {
@@ -282,7 +283,8 @@
       var link = card.querySelector('a.ad-link');
       if (!link) return;
       e.preventDefault();
-      window.open(link.href, '_blank', 'noopener');
+      var w2 = window.open(link.href, '_blank', 'noopener');
+      if (!w2) window.location.href = link.href;
     });
   }
   function initClickCount() {

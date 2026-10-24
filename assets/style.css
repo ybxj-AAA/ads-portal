@@ -1244,3 +1244,13 @@ details.more[open] summary::after { content: "－"; }
 
 .article .totop a { color: var(--muted); border-bottom: 1px solid var(--line-2); }
 .article .totop a:hover { color: var(--ink); }
+/* 锚点跳转别被吸顶导航挡住 */
+h1[id], h2[id], h3[id], section[id] { scroll-margin-top: 74px; }
+
+/* 目录两列，更紧凑 */
+.toc { grid-template-columns: 1fr 1fr; }
+.toc .toc-title { grid-column: 1 / -1; }
+
+@media (max-width: 640px) {
+  .toc { grid-template-columns: 1fr; }
+}
