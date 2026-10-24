@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /go.html
+
+Sitemap: https://ybxj-aaa.github.io/ads-portal/sitemap.xml
