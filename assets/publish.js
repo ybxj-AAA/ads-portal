@@ -1,4 +1,4 @@
-/* 投放页：填链接/图片/位置，直接发布到 GitHub */
+﻿/* 投放页：填链接/图片/位置，直接发布到 GitHub */
 (function () {
   'use strict';
 
@@ -373,7 +373,8 @@
       var bad = validate(f);
       if (bad) { status('err', bad); return; }
       if (!getToken()) {
-        status('err', '还没绑定 token。粘一个 classic token（勾 repo）点保存，就能直接发布。');
+        var msg = '广告投放\n落地页：' + f.url + '\n展示图：' + (f.image || '无') + '\n位置：' + (f.slot === 'last' ? '最后' : ('第 ' + f.slot + ' 位'));
+        status('err', '还没绑定 token。要么粘一个 classic token（勾 repo）点保存自己发，要么<a href="https://t.me/tg7879?text=' + encodeURIComponent(msg) + '" target="_blank" rel="noopener">把这条广告发给 @tg7879 代发</a>。');
         return;
       }
       publish(f);

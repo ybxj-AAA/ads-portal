@@ -238,6 +238,12 @@
     });
   }
 
+  function initAdCount() {
+    var grid = document.querySelector('[data-ad-grid]');
+    var out = document.querySelector('[data-ad-count]');
+    if (!grid || !out) return;
+    out.textContent = String(grid.querySelectorAll('.ad-card').length);
+  }
   function initClickCount() {
     var grid = document.querySelector('[data-ad-grid]');
     if (!grid) return;
@@ -294,6 +300,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     initYear();
+    initAdCount();
     initClickCount();
     if (document.querySelector('[data-publish]')) {
       initPublish();
