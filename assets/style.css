@@ -1033,3 +1033,7 @@ details.more[open] summary::after { content: "－"; }
   border-radius: var(--radius);
   margin: 0 0 8px;
 }
+.upload-row.is-drag {
+  border-color: var(--ink);
+  background: #f5f1e7;
+}

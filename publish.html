@@ -51,7 +51,7 @@
 
           <div class="field">
             <label>展示图 <span class="opt">可选</span></label>
-            <div class="upload-row">
+            <div class="upload-row" data-drop-zone>
               <label class="btn btn-ghost btn-sm" for="adImageFile">从电脑选图</label>
               <input id="adImageFile" type="file" accept="image/*" hidden />
               <button class="link-btn" type="button" data-image-clear hidden>移除</button>
@@ -59,18 +59,27 @@
             </div>
             <img class="upload-preview" data-image-preview hidden alt="" />
             <input id="adImage" type="text" placeholder="或者粘图片地址 https://…" autocomplete="off" spellcheck="false" />
-            <span class="hint">选图会自动压到 960px 宽，不用管格式。</span>
+            <span class="hint">选图会自动压到 960px 宽；也可以把图片拖进来，或者直接 Ctrl+V 粘贴。</span>
           </div>
 
           <div class="field">
             <label for="adSlot">投放位置</label>
             <select id="adSlot">
-              <option value="1">第 1 位（最前）</option>
+              <option value="1">第 1 位</option>
               <option value="2">第 2 位</option>
               <option value="3">第 3 位</option>
+              <option value="4">第 4 位</option>
+              <option value="5">第 5 位</option>
+              <option value="6">第 6 位</option>
+              <option value="7">第 7 位</option>
+              <option value="8">第 8 位</option>
+              <option value="9">第 9 位</option>
+              <option value="10">第 10 位</option>
+              <option value="11">第 11 位</option>
+              <option value="12">第 12 位</option>
               <option value="last" selected>追加到最后</option>
             </select>
-            <span class="hint">选已有位置会替换那条，追加则排在最后（最多 3 条）。</span>
+            <span class="hint">选已有位置会替换那条，追加则排在最后。最多 12 条。</span>
           </div>
 
           <details class="more">
@@ -138,7 +147,7 @@
       </div>
 
       <h2 class="panel-title">说明</h2>
-      <p class="hint">发布走 GitHub 提交，大约一两分钟生效。换内容就再发一次选同一个位置。</p>
+      <p class="hint">发布走 GitHub 提交，大约一两分钟生效。换内容就再发一次选同一个位置，会替换掉原来那条。</p>
     </aside>
   </div>
 </main>

@@ -1,4 +1,4 @@
-/* 投放页：填链接、上传展示图、选位置，直接发布到 GitHub */
+﻿/* 投放页：填链接、上传展示图、选位置，直接发布到 GitHub */
 (function () {
   'use strict';
 
@@ -9,7 +9,7 @@
   var START = '<!-- ADS:START -->';
   var END = '<!-- ADS:END -->';
   var TOKEN_KEY = 'ads.gh.token';
-  var MAX_SLOTS = 3;
+  var MAX_SLOTS = 12;
 
   var imgState = { data: '' };
 
@@ -45,6 +45,30 @@
 
   function escapeRe(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
+  function normalizeImage(u) {
+    if (!u) return '';
+    var m = /[?&]mediaurl=([^&]+)/i.exec(u);
+    if (m) {
+      try { u = decodeURIComponent(m[1]); } catch (e) { /* ignore */ }
+      if (/[?&]mediaurl=/i.test(u)) {
+        try { u = decodeURIComponent(u); } catch (e2) { /* ignore */ }
+      }
+    }
+    return u;
+  }
+
+  function probeImage(url) {
+    return new Promise(function (resolve) {
+      var img = new Image();
+      var done = false;
+      var timer = setTimeout(function () {
+        if (!done) { done = true; resolve(false); }
+      }, 8000);
+      img.onload = function () { if (!done) { done = true; clearTimeout(timer); resolve(true); } };
+      img.onerror = function () { if (!done) { done = true; clearTimeout(timer); resolve(false); } };
+      img.src = url;
+    });
+  }
   function hostOf(url) {
     try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return ''; }
   }
@@ -199,7 +223,7 @@
   function readForm() {
     return {
       url: $('#adUrl').value.trim(),
-      image: imgState.data || $('#adImage').value.trim(),
+      image: imgState.data || normalizeImage($('#adImage').value.trim()),
       slot: $('#adSlot').value,
       title: $('#adTitle').value.trim(),
       desc: $('#adDesc').value.trim(),
@@ -412,6 +436,7 @@
     var imgStateEl = $('[data-image-state]');
     var imgClear = $('[data-image-clear]');
     var imgUrl = $('#adImage');
+    var dropZone = $('[data-drop-zone]');
 
     function showImage(src, note) {
       imgState.data = src || '';
@@ -423,8 +448,7 @@
       if (imgStateEl) imgStateEl.textContent = note || (src ? '已选图' : '没选图片就用色块占位');
     }
 
-    fileInput && fileInput.addEventListener('change', function () {
-      var file = fileInput.files && fileInput.files[0];
+    function useFile(file) {
       if (!file) return;
       if (!/^image\//.test(file.type)) { status('err', '这个文件不是图片。'); return; }
       var reader = new FileReader();
@@ -452,6 +476,43 @@
         img.src = reader.result;
       };
       reader.readAsDataURL(file);
+    }
+
+    fileInput && fileInput.addEventListener('change', function () {
+      useFile(fileInput.files && fileInput.files[0]);
+    });
+
+    // 拖拽图片
+    if (dropZone) {
+      ['dragenter', 'dragover'].forEach(function (ev) {
+        dropZone.addEventListener(ev, function (e) {
+          e.preventDefault();
+          dropZone.classList.add('is-drag');
+        });
+      });
+      ['dragleave', 'drop'].forEach(function (ev) {
+        dropZone.addEventListener(ev, function (e) {
+          e.preventDefault();
+          dropZone.classList.remove('is-drag');
+        });
+      });
+      dropZone.addEventListener('drop', function (e) {
+        var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (file) useFile(file);
+      });
+    }
+
+    // 直接 Ctrl+V 粘图片
+    document.addEventListener('paste', function (e) {
+      if (!document.querySelector('[data-publish]')) return;
+      var items = (e.clipboardData && e.clipboardData.items) || [];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].type && items[k].type.indexOf('image/') === 0) {
+          useFile(items[k].getAsFile());
+          e.preventDefault();
+          return;
+        }
+      }
     });
 
     imgClear && imgClear.addEventListener('click', function () {
@@ -460,10 +521,29 @@
       showImage('');
     });
 
+    // 粘图片地址后先试加载，能加载才算数
+    var probeTimer = null;
     imgUrl && imgUrl.addEventListener('input', function () {
-      if (imgUrl.value.trim() && imgState.data) showImage('');
+      if (imgState.data) showImage('');
+      var raw = imgUrl.value.trim();
+      if (probeTimer) clearTimeout(probeTimer);
+      if (!raw) { if (imgStateEl) imgStateEl.textContent = '没选图片就用色块占位'; return; }
+      var url = normalizeImage(raw);
+      if (!/^https?:\/\//i.test(url)) { if (imgStateEl) imgStateEl.textContent = '这个地址不是 http(s) 图片。'; return; }
+      if (imgStateEl) imgStateEl.textContent = '正在检查图片…';
+      probeTimer = setTimeout(function () {
+        probeImage(url).then(function (ok) {
+          if (ok) {
+            showImage('', '图片可以加载，发布时会直接用这个地址');
+            if (imgPreview) { imgPreview.src = url; imgPreview.hidden = false; }
+            if (imgStateEl) imgStateEl.textContent = '图片可以加载，发布时直接用这个地址';
+          } else {
+            if (imgStateEl) imgStateEl.textContent = '这个地址打不开或者不是图片，建议「从电脑选图」';
+            if (imgPreview) { imgPreview.hidden = true; }
+          }
+        });
+      }, 500);
     });
-
     var copyBtn = $('#copyBtn');
     copyBtn && copyBtn.addEventListener('click', function () {
       var text = els.output.textContent;
