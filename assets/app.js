@@ -1,4 +1,4 @@
-﻿/* 广告投放中心 — 页面交互与密钥校验 */
+/* 广告投放中心 — 页面交互与密钥校验 */
 (function () {
   'use strict';
 
@@ -185,6 +185,15 @@
 
     document.querySelectorAll('[data-key-open]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
+        // 这台浏览器已经验证过，就不再弹框，直接进投放页
+        if (readSession()) {
+          var isPublish = !!document.querySelector('[data-publish]');
+          if (!isPublish) {
+            e.preventDefault();
+            window.location.href = 'publish.html';
+          }
+          return;
+        }
         e.preventDefault();
         openModal();
       });
@@ -269,11 +278,13 @@
     var resetBtn = document.querySelector('[data-key-reset]');
 
     function unlock(session) {
+      var perm = !!(session.perm || session.permanent);
+      var exp = session.exp || (session.expiresAt ? fmtDate(session.expiresAt) : '');
       main.classList.remove('is-locked');
       main.classList.add('is-unlocked');
       if (statusWrap) {
         if (planEl) planEl.textContent = session.plan || '已授权';
-        if (expEl) expEl.textContent = session.perm ? '不过期' : (session.exp ? '有效期至 ' + session.exp : '');
+        if (expEl) expEl.textContent = perm ? '不过期' : (exp ? '有效期至 ' + exp : '');
       }
     }
 
@@ -294,8 +305,22 @@
     onSuccess = function (res) { unlock(res); };
     bindModal();
 
+    // 支持 publish.html#k=密钥 免输入进入（自己收藏的链接用）
+    var urlKey = /[?#&]k=([^&#]+)/.exec(location.search + location.hash);
+    if (urlKey && !session) {
+      var raw = '';
+      try { raw = decodeURIComponent(urlKey[1]); } catch (e) { raw = urlKey[1]; }
+      validateKey(raw).then(function (res) {
+        if (res.status === 'ok') {
+          saveSession(res);
+          unlock(res);
+          try { history.replaceState(null, '', location.pathname); } catch (e) { /* ignore */ }
+        }
+      });
+    }
+
     // 支持 publish.html?key=1 直接弹密钥框（方便从 TG 发链接过来）
-    if (/[?&]key=1\b/.test(location.search)) openModal();
+    if (!session && /[?&]key=1\b/.test(location.search)) openModal();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
