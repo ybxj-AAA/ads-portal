@@ -4,7 +4,7 @@
 
   var TG = 'tg7879';
   var TG_URL = 'https://t.me/' + TG;
-  var SESSION_KEY = 'ads.key.session';
+  var SESSION_KEY = 'ads.key.auth';
 
   /* ---------- SHA-256（不依赖 crypto.subtle，本地 file:// 也能验） ---------- */
 
@@ -122,7 +122,7 @@
 
   function saveSession(res) {
     try {
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+      localStorage.setItem(SESSION_KEY, JSON.stringify({
         h: res.hash, plan: res.plan, exp: fmtDate(res.expiresAt), perm: !!res.permanent
       }));
     } catch (e) { /* 隐私模式忽略 */ }
@@ -130,13 +130,13 @@
 
   function readSession() {
     try {
-      var raw = sessionStorage.getItem(SESSION_KEY);
+      var raw = localStorage.getItem(SESSION_KEY);
       if (!raw) return null;
       var s = JSON.parse(raw);
       if (s.perm) return s;
       var exp = parseDate(s.exp);
       if (!exp || today().getTime() > exp.getTime()) {
-        sessionStorage.removeItem(SESSION_KEY);
+        localStorage.removeItem(SESSION_KEY);
         return null;
       }
       return s;
@@ -144,7 +144,7 @@
   }
 
   function clearSession() {
-    try { sessionStorage.removeItem(SESSION_KEY); } catch (e) { /* ignore */ }
+    try { localStorage.removeItem(SESSION_KEY); } catch (e) { /* ignore */ }
   }
 
   /* ---------- 弹窗 ---------- */
