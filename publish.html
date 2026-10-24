@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>投放页 · 输入密钥发布广告</title>
-<meta name="description" content="输入投放密钥后填表发布广告，提交到仓库一两分钟上线。密钥有效期 7 天到长期，购买联系 Telegram @tg7879。" />
+<meta name="description" content="输入投放密钥，填落地页链接、展示图和位置，直接发布上线。密钥有效期 7 天到长期，购买联系 Telegram @tg7879。" />
 <meta name="robots" content="noindex, follow" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231b1a17'/><text x='50' y='70' font-size='58' font-family='serif' font-weight='bold' text-anchor='middle' fill='%23f6f4ef'>A</text></svg>" />
 <link rel="stylesheet" href="assets/style.css" />
@@ -25,7 +25,7 @@
 <main class="wrap" data-publish>
   <div class="page-head">
     <h1>投放页</h1>
-    <p>验证密钥后填表，点「发布上线」就直接提交到仓库，一两分钟首页更新。密钥记在浏览器里，不用每次重输。</p>
+    <p>填三样东西：落地页链接、展示图、放第几位，点「发布上线」，一两分钟后首页就有了。</p>
   </div>
 
   <div class="key-status" data-key-status>
@@ -43,43 +43,56 @@
 
       <div class="publish-main">
         <form id="adForm" class="form-grid" novalidate>
-          <div class="field-row">
-            <div class="field">
-              <label for="adId">广告 ID</label>
-              <input id="adId" type="text" placeholder="shop-a" required />
-              <span class="hint">英文或数字，用来记点击，别和已有重复</span>
-            </div>
-            <div class="field">
-              <label for="adTag">角标</label>
-              <input id="adTag" type="text" placeholder="位置 04 · 侧栏" />
-              <span class="hint">卡片左上角那行小字</span>
-            </div>
+          <div class="field">
+            <label for="adUrl">落地页链接 <span class="req">必填</span></label>
+            <input id="adUrl" type="text" placeholder="https://你的落地页" autocomplete="off" spellcheck="false" />
+            <span class="hint">点广告后跳到这里，只支持 http / https。</span>
           </div>
 
           <div class="field">
-            <label for="adTitle">标题</label>
-            <input id="adTitle" type="text" placeholder="XX 商城限时活动" required />
+            <label for="adImage">展示图链接 <span class="opt">可选</span></label>
+            <input id="adImage" type="text" placeholder="https://xxx.com/banner.jpg" autocomplete="off" spellcheck="false" />
+            <span class="hint">直接粘图片地址（.jpg / .png / .webp）。不填就用色块占位。</span>
           </div>
 
           <div class="field">
-            <label for="adDesc">描述</label>
-            <textarea id="adDesc" placeholder="一两句话说清卖点，别写满"></textarea>
-          </div>
-
-          <div class="field">
-            <label for="adUrl">落地页链接</label>
-            <input id="adUrl" type="text" placeholder="https://你的落地页" required />
-            <span class="hint">只支持 http / https，其他协议会被跳转页拦下</span>
-          </div>
-
-          <div class="field">
-            <label for="adCover">底纹</label>
-            <select id="adCover">
-              <option value="cover-blue">灰蓝</option>
-              <option value="cover-violet">浅粉</option>
-              <option value="cover-green">淡绿</option>
+            <label for="adSlot">投放位置</label>
+            <select id="adSlot">
+              <option value="1">第 1 位（最前）</option>
+              <option value="2">第 2 位</option>
+              <option value="3">第 3 位</option>
+              <option value="last" selected>追加到最后</option>
             </select>
+            <span class="hint">选已有位置会替换那条，追加则排在最后（最多 3 条）。</span>
           </div>
+
+          <details class="more">
+            <summary>补充信息（不填也行）</summary>
+            <div class="form-grid" style="margin-top:12px;">
+              <div class="field-row">
+                <div class="field">
+                  <label for="adTitle">标题</label>
+                  <input id="adTitle" type="text" placeholder="不填就用域名" />
+                </div>
+                <div class="field">
+                  <label for="adTag">角标</label>
+                  <input id="adTag" type="text" placeholder="如 位置 01 · 顶部" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="adDesc">描述</label>
+                <textarea id="adDesc" placeholder="一两句话，不填也行"></textarea>
+              </div>
+              <div class="field">
+                <label for="adCover">没图时的底纹</label>
+                <select id="adCover">
+                  <option value="cover-blue">灰蓝</option>
+                  <option value="cover-violet">浅粉</option>
+                  <option value="cover-green">淡绿</option>
+                </select>
+              </div>
+            </div>
+          </details>
 
           <div class="actions-row">
             <button class="btn btn-primary" type="button" data-publish>发布上线</button>
@@ -88,15 +101,15 @@
           </div>
         </form>
 
-        <div class="token-box" data-token-box>
+        <div class="token-box">
           <p class="token-title">发布权限</p>
-          <p class="hint" data-token-state>未绑定，只能生成代码，不能直接发布。</p>
+          <p class="hint" data-token-state>还没绑定，点「保存」前先把 token 粘进来。</p>
           <div class="token-row">
             <input type="password" data-token-input placeholder="ghp_ 开头的 GitHub token" autocomplete="off" spellcheck="false" />
             <button class="btn btn-ghost btn-sm" type="button" data-token-save>保存</button>
             <button class="btn btn-ghost btn-sm" type="button" data-token-clear>清除</button>
           </div>
-          <p class="hint">token 只存在你这台电脑的浏览器里，不会发给别人。生成地址：<a class="tg-link" href="https://github.com/settings/tokens/new?scopes=repo&amp;description=ads-portal" target="_blank" rel="noopener">新建 classic token（勾 repo）</a></p>
+          <p class="hint">只绑定一次，存在这台电脑的浏览器里。没有 token？<a class="tg-link" href="https://github.com/settings/tokens/new?scopes=repo&amp;description=ads-portal" target="_blank" rel="noopener">到这里生成</a>，勾上 <b>repo</b>，复制生成的 ghp_ 开头的串。</p>
         </div>
 
         <p class="publish-status" data-status></p>
@@ -110,7 +123,7 @@
       </ul>
 
       <h2 class="panel-title">生成的代码</h2>
-      <p class="hint">点「只生成代码」会出现一段 HTML，可复制给维护的人贴到首页。</p>
+      <p class="hint">点「只生成代码」会出现一段 HTML，可以复制给维护的人。</p>
       <pre class="output" id="output">还没生成。</pre>
       <div class="actions-row">
         <button class="btn btn-ghost btn-sm" type="button" id="copyBtn">复制代码</button>
@@ -118,7 +131,7 @@
       </div>
 
       <h2 class="panel-title">说明</h2>
-      <p class="hint">发布走 GitHub 提交，所以大约一两分钟才生效。想改内容就再发一次，旧的要先下线。</p>
+      <p class="hint">发布走 GitHub 提交，大约一两分钟生效。换内容就再发一次选同一个位置。</p>
     </aside>
   </div>
 </main>

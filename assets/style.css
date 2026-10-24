@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    广告投放中心
    纸面风格：暖白底、细黑线、衬线标题、单一砖红色强调
    ========================================================================== */
@@ -265,6 +265,14 @@ code {
   place-items: center;
   border-bottom: 1px solid var(--line);
   overflow: hidden;
+}
+
+.ad-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .ad-cover .mark {
@@ -543,8 +551,7 @@ textarea { min-height: 80px; resize: vertical; }
 
 .token-row input { flex: 1; min-width: 0; }
 
-.token-box.has-token .token-row { display: none; }
-.token-box.has-token [data-token-state] { color: var(--ok); }
+
 
 .publish-status {
   display: none;
@@ -602,6 +609,19 @@ textarea { min-height: 80px; resize: vertical; }
   color: var(--muted);
   border-style: dashed;
   background: transparent;
+}
+
+.slot-no {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
 }
 
 .ad-list .ad-id {
@@ -954,3 +974,42 @@ textarea { min-height: 80px; resize: vertical; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
 }
+
+/* 表单补充 */
+
+.field .req {
+  margin-left: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.field .opt {
+  margin-left: 4px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+details.more {
+  padding: 10px 12px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--radius);
+}
+
+details.more summary {
+  font-size: 13px;
+  color: var(--ink-2);
+  cursor: pointer;
+  list-style: none;
+}
+
+details.more summary::-webkit-details-marker { display: none; }
+
+details.more summary::after {
+  content: "＋";
+  float: right;
+  color: var(--muted);
+}
+
+details.more[open] summary::after { content: "－"; }
