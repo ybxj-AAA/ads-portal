@@ -556,11 +556,13 @@
     var imgUrl = $('#adImage');
     var dropZone = $('[data-drop-zone]');
 
+    var BLANK_IMG = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
     function showImage(src, note) {
       imgState.data = src || '';
       if (imgPreview) {
         if (src) { imgPreview.src = src; imgPreview.hidden = false; }
-        else { imgPreview.hidden = true; imgPreview.removeAttribute('src'); }
+        else { imgPreview.hidden = true; imgPreview.src = BLANK_IMG; }
       }
       if (imgClear) imgClear.hidden = !src;
       if (imgStateEl) imgStateEl.textContent = note || (src ? '已选图' : '没选图片就用色块占位');
