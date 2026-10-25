@@ -1,4 +1,4 @@
-﻿/* 投放页：填链接、上传展示图、选位置，直接发布到 GitHub */
+/* 投放页：填链接、上传展示图、选位置，直接发布到 GitHub */
 (function () {
   'use strict';
 
@@ -10,6 +10,8 @@
   var END = '<!-- ADS:END -->';
   var FSTART = '<!-- FLOATS:START -->';
   var FEND = '<!-- FLOATS:END -->';
+  var PSTART = '<!-- POPUP:START -->';
+  var PEND = '<!-- POPUP:END -->';
   var TOKEN_KEY = 'ads.gh.token';
   var MAX_SLOTS = 12;
 
@@ -211,6 +213,31 @@
     ].join('\n');
   }
 
+  function buildPopup(ad) {
+    var href = 'go.html?u=' + encodeURIComponent(ad.url) + '&id=' + encodeURIComponent(ad.id);
+    var media = [
+      '          <div class="pop-ad-media">',
+      ad.image ? '            <img src="' + esc(ad.image) + '" alt="' + esc(ad.title) + '" />' : '',
+      '            <span class="pop-ad-badge">广告</span>',
+      '          </div>'
+    ].filter(Boolean).join('\n');
+    return [
+      '        <a class="pop-ad-link" href="' + esc(href) + '" target="_blank" rel="noopener">',
+      media,
+      '          <div class="pop-ad-body">',
+      '            <span class="pop-ad-title">' + esc(ad.title) + '</span>',
+      ad.desc ? '            <span class="pop-ad-desc">' + esc(ad.desc) + '</span>' : '',
+      '            <span class="pop-ad-cta">立即前往 <span>↗</span></span>',
+      '          </div>',
+      '        </a>'
+    ].filter(Boolean).join('\n');
+  }
+
+  function replacePopup(html, inner) {
+    var re = new RegExp(escapeRe(PSTART) + '[\\s\\S]*?' + escapeRe(PEND));
+    if (!re.test(html)) return html;
+    return html.replace(re, PSTART + '\n' + inner + '\n        ' + PEND);
+  }
   function replaceFloats(html, floats) {
     var region = FSTART + '\n' + floats.join('\n\n') + '\n        ' + FEND;
     var re = new RegExp(escapeRe(FSTART) + '[\\s\\S]*?' + escapeRe(FEND));
@@ -277,6 +304,27 @@
     var files = [];
 
     loadPage().then(function (page) {
+      if (f.slot === 'popup') {
+        var popAd = {
+          id: 'popup-1',
+          url: f.url,
+          image: /^data:image\//i.test(f.image) ? f.image : f.image,
+          title: f.title || hostOf(f.url) || '推广',
+          desc: f.desc || ''
+        };
+        if (/^data:image\//i.test(f.image)) {
+          var pm = /^data:(image\/[a-z0-9+.-]+);base64,(.*)$/i.exec(f.image);
+          if (pm) {
+            var pext = pm[1].split('/')[1].replace('jpeg', 'jpg');
+            popAd.image = 'assets/ads/popup-1.' + pext;
+            files.push({ path: popAd.image, content: pm[2] });
+          }
+        }
+        var nh2 = replacePopup(page.html, buildPopup(popAd));
+        files.push({ path: FILE, content: b64encode(nh2) });
+        return commitFiles(files, '发布弹窗广告：' + popAd.title);
+      }
+
       if (String(f.slot).indexOf('float-') === 0) {
         var idxNum = parseInt(String(f.slot).split('-')[1], 10) || 1;
         var floats = parseFloats(page.html);

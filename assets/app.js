@@ -1,4 +1,4 @@
-﻿/* 广告投放中心 — 页面交互与密钥校验 */
+/* 广告投放中心 — 页面交互与密钥校验 */
 (function () {
   'use strict';
 
@@ -302,6 +302,37 @@
     });
   }
 
+  function initPopAd() {
+    var box = document.querySelector('[data-pop-ad]');
+    if (!box) return;
+    var inner = box.querySelector('[data-pop-inner]');
+    if (!inner || !inner.innerHTML.replace(/<!--[\s\S]*?-->/g, '').trim()) return;
+
+    var KEY = 'ads.pop.seen';
+    try { if (sessionStorage.getItem(KEY)) return; } catch (e) { /* ignore */ }
+
+    function open() {
+      box.classList.add('is-open');
+      box.removeAttribute('hidden');
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) { /* ignore */ }
+    }
+
+    function close() {
+      box.classList.remove('is-open');
+      window.setTimeout(function () { box.setAttribute('hidden', ''); }, 250);
+    }
+
+    window.setTimeout(open, 4000);
+
+    box.addEventListener('click', function (e) {
+      if (e.target === box || e.target.closest('[data-pop-close]')) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && box.classList.contains('is-open')) close();
+    });
+  }
+
   function initPublish() {
     var main = document.querySelector('[data-publish]');
     if (!main) return;
@@ -362,6 +393,7 @@
     initAdCount();
     initCardClick();
     initClickCount();
+    initPopAd();
     if (document.querySelector('[data-publish]')) {
       initPublish();
     } else {
