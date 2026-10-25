@@ -57,3 +57,13 @@ python -m http.server 8765
 ## 换域名时改这几处
 
 `index.html`、`guide.html` 里的 canonical 与 og:url；`sitemap.xml` 的 loc；`404.html` 里写死的 `/ads-portal/` 前缀。
+
+## Google 验证记录
+
+$$Google Search Console（网址前缀 https://ybxj-aaa.github.io/ads-portal/）用的验证标记：
+
+`html
+<meta name="google-site-verification" content="VQ76dmnuqilK0c2Wm6OjcU-__NMub_A3rugf_Osabh8" />
+`
+
+在 index.html 的 <head> 里，被 google-verification-keep 注释包着。**不要删**，删了 GSC 验证会失效。
