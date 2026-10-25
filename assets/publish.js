@@ -8,6 +8,8 @@
   var GIT = 'https://api.github.com/repos/' + REPO + '/git';
   var START = '<!-- ADS:START -->';
   var END = '<!-- ADS:END -->';
+  var FSTART = '<!-- FLOATS:START -->';
+  var FEND = '<!-- FLOATS:END -->';
   var TOKEN_KEY = 'ads.gh.token';
   var MAX_SLOTS = 12;
 
@@ -191,6 +193,30 @@
     ].join('\n');
   }
 
+  function parseFloats(html) {
+    var re = /<a class="floater"[\s\S]*?<\/a>/g;
+    var out = [];
+    var m;
+    while ((m = re.exec(html))) out.push(m[0]);
+    return out;
+  }
+
+  function buildFloater(label, url, idx) {
+    var href = 'go.html?u=' + encodeURIComponent(url) + '&id=float-' + idx;
+    return [
+      '        <a class="floater" href="' + esc(href) + '" target="_blank" rel="noopener" data-float-id="float-' + idx + '">',
+      '          <span class="floater-dot" aria-hidden="true"></span>',
+      '          <span class="floater-text">' + esc(label) + '</span>',
+      '        </a>'
+    ].join('\n');
+  }
+
+  function replaceFloats(html, floats) {
+    var region = FSTART + '\n' + floats.join('\n\n') + '\n        ' + FEND;
+    var re = new RegExp(escapeRe(FSTART) + '[\\s\\S]*?' + escapeRe(FEND));
+    if (!re.test(html)) return html;
+    return html.replace(re, region);
+  }
   function replaceRegion(html, blocks) {
     var body = blocks.map(function (b) { return indent(b.raw); }).join('\n\n');
     var region = START + '\n' + body + '\n        ' + END;
@@ -251,6 +277,18 @@
     var files = [];
 
     loadPage().then(function (page) {
+      if (String(f.slot).indexOf('float-') === 0) {
+        var idxNum = parseInt(String(f.slot).split('-')[1], 10) || 1;
+        var floats = parseFloats(page.html);
+        var label = f.title || '去看看';
+        var fl = buildFloater(label, f.url, idxNum);
+        if (floats[idxNum - 1]) floats[idxNum - 1] = fl;
+        else floats.push(fl);
+        floats = floats.slice(0, 3);
+        var nh = replaceFloats(page.html, floats);
+        return commitFiles([{ path: FILE, content: b64encode(nh) }], '发布悬浮按钮：' + label);
+      }
+
       var blocks = parseBlocks(page.html);
       var replaceIndex = -1;
 
@@ -314,6 +352,22 @@
     });
   }
 
+  function removeFloat(idx) {
+    if (!window.confirm('确定下线这个悬浮按钮？')) return;
+    status('busy', '正在下线…');
+    loadPage().then(function (page) {
+      var floats = parseFloats(page.html);
+      floats.splice(idx - 1, 1);
+      var nh = replaceFloats(page.html, floats);
+      return commitFiles([{ path: FILE, content: b64encode(nh) }], '下线悬浮按钮');
+    }).then(function () {
+      status('ok', '已下线。');
+      return refreshList();
+    }).catch(function (err) {
+      status('err', errText(err));
+    });
+  }
+
   /* ---------- 列表 ---------- */
 
   function renderList(blocks) {
@@ -334,6 +388,19 @@
     });
   }
 
+  function renderFloats(floats) {
+    if (!els.list || !floats.length) return;
+    floats.forEach(function (raw, i) {
+      var m = /<span class="floater-text">([\s\S]*?)<\/span>/.exec(raw);
+      var label = m ? unesc(m[1]) : ('悬浮按钮 ' + (i + 1));
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="slot-no">浮</span>' +
+        '<span class="ad-title">' + esc(label) + '</span>' +
+        '<button class="link-btn" type="button" data-del-float="' + (i + 1) + '">下线</button>';
+      els.list.appendChild(li);
+    });
+  }
+
   function refreshList() {
     if (!getToken()) {
       if (els.list) els.list.innerHTML = '<li class="empty">绑定 token 后显示当前在投的广告。</li>';
@@ -342,6 +409,7 @@
     }
     return loadPage().then(function (page) {
       renderList(parseBlocks(page.html));
+      renderFloats(parseFloats(page.html));
     }).catch(function () {
       if (els.list) els.list.innerHTML = '<li class="empty">读取失败，检查 token。</li>';
       if (els.count) els.count.textContent = '—';
@@ -424,6 +492,8 @@
     });
 
     els.list && els.list.addEventListener('click', function (e) {
+      var delFloat = e.target.closest('[data-del-float]');
+      if (delFloat) { removeFloat(parseInt(delFloat.getAttribute('data-del-float'), 10)); return; }
       var btn = e.target.closest('[data-del]');
       if (!btn) return;
       remove(btn.getAttribute('data-del'));
