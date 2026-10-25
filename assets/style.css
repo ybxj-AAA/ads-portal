@@ -1458,3 +1458,18 @@ h1[id], h2[id], h3[id], section[id] { scroll-margin-top: 74px; }
   .pop-ad-title { font-size: 16px; }
 }
 
+
+/* ---------- 首页背景图 ---------- */
+
+body.home {
+  background-color: #f6f4ef;
+  background-image: url("bg-home.jpg");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@media (max-width: 900px) {
+  body.home { background-attachment: scroll; }
+}
