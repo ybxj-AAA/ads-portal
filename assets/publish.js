@@ -664,6 +664,10 @@
         });
       }, 500);
     });
+
+    // 初始化时给预览图一个占位 src，避免隐藏的空 src 图片
+    showImage('');
+
     var copyBtn = $('#copyBtn');
     copyBtn && copyBtn.addEventListener('click', function () {
       var text = els.output.textContent;
